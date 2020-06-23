@@ -1,6 +1,8 @@
 const userName = document.getElementById('userName');
 const password = document.getElementById('password');
 const signInBtn = document.getElementById('signIn');
+const loginId = document.getElementById('wtf');
+const loginMessages = document.getElementById('loginMessages');
 
 const database = firebase.database();
 
@@ -15,20 +17,14 @@ signInBtn.addEventListener('click', (e) => {
         if (snapshot.exists()) {
             const userData = snapshot.val();
             if (userData.password === password.value) {
-                console.log('login');
-
                 const navigator = document.querySelector('#navigator');
                 navigator.resetToPage('upcomingraces.html');
-
-                let loginId = document.getElementById('wtf');
                 loginId.innerHTML = userName.value;
-                console.log(loginId.innerHTML);
-
             } else {
-                console.log('no login for the wicked');
+                loginMessages.innerHTML = 'Onjuist wachtwoord.'
             }
         } else {
-            console.log('no such user');
+            loginMessages.innerHTML = 'Gebruikersnaam bestaat niet.'
             return;
         }
     });

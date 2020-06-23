@@ -1,14 +1,35 @@
-const userId = document.getElementById('userId');
+const userName = document.getElementById('userName');
 const password = document.getElementById('password');
-const addBtn = document.getElementById('addBtn');
+const signInBtn = document.getElementById('signIn');
 
 const database = firebase.database();
 
-addBtn.addEventListener('click', (e) => {
+signInBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    database.ref('/players/' + userId.value).set({
-        password: password.value
-    })
+
+    if (userName.value === '' || password.value === '') return;
+
+    var ref = database.ref('/players/' + userName.value);
+    if (ref === null) {
+        console.log('no good');
+    }
+
+    ref.once("value", snapshot => {
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            if (userData.password === password.value) {
+                console.log('login');
+                const navigator = document.querySelector('#navigator');
+                navigator.resetToPage('upcomingraces.html');
+            } else {
+                console.log('no login for the wicked');
+            }
+        } else {
+            console.log('no such user');
+            return;
+        }
+    });
+
 })
 
 

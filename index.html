@@ -14,35 +14,48 @@
 
 <body>
 
-    <ons-page>
-        <div style="text-align: center; margin-top: 200px">
-            <p>
-                <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
-            </p>
+    <ons-navigator id="navigator">
+        <ons-page>
+            <div style="text-align: center; margin-top: 200px">
+                <p>
+                    <ons-input id="userName" placeholder="Gebruikersnaam" modifier="underbar"></ons-input>
+                </p>
 
-            <p>
-                <ons-input id="password" placeholder="Password" type="password" modifier="underbar">
-                </ons-input>
-            </p>
+                <p>
+                    <ons-input id="password" placeholder="Wachtwoord" type="password" modifier="underbar">
+                    </ons-input>
+                </p>
 
-            <p>
-                <ons-button>Sign in</ons-button>
-            </p>
-        </div>
+                <p>
+                    <ons-button id="signIn">Aanmelden</ons-button>
+                </p>
+            </div>
 
-    </ons-page>
+        </ons-page>
+    </ons-navigator>
 
-    <!-- <main>
-        <form>
-            <label for="userId">Naam</label><br>
-            <input type="text" name="userId" id="userId"><br>
-            <label for="password">Wachtwoord</label><br>
-            <input type="password" name="password" id="password"><br>
-            <button id="addBtn">Add</button>
-        </form>
-    </main> -->
-
-
+    <template id="upcomingraces.html">
+        <ons-page id="home">
+            <ons-toolbar>
+                <!-- <div class="left">
+                    <ons-back-button>Back</ons-back-button>
+                </div> -->
+                <div class="center">Matemco F1 Poule 2020</div>
+            </ons-toolbar>
+            <ons-list>
+                <ons-list-header>Upcoming races</ons-list-header>
+                <ons-list-item tappable>Austria</ons-list-item>
+                <ons-list-item tappable>Austria</ons-list-item>
+                <ons-list-item tappable>Hungary</ons-list-item>
+                <ons-list-item tappable>Silverstone</ons-list-item>
+                <ons-list-item tappable>Silverstone</ons-list-item>
+                <ons-list-item tappable>Spain</ons-list-item>
+                <ons-list-item tappable>Belgium</ons-list-item>
+                <ons-list-item tappable>Italy</ons-list-item>
+                <ons-list-header>Past races</ons-list-header>
+            </ons-list>
+        </ons-page>
+      </template>
 
 
     <script>
@@ -58,29 +71,8 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
-    <!-- <script src="app.js"></script> -->
+    <script src="app.js"></script>
 
-
-
-
-
-    <!-- <ons-page>
-        <div style="text-align: center; margin-top: 200px">
-            <p>
-                <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
-            </p>
-
-            <p>
-                <ons-input id="password" placeholder="Password" type="password" modifier="underbar">
-                </ons-input>
-            </p>
-
-            <p>
-                <ons-button>Sign in</ons-button>
-            </p>
-        </div>
-
-    </ons-page> -->
 
     <!-- <ons-page>
         <ons-toolbar>

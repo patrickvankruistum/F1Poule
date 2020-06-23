@@ -10,17 +10,20 @@ signInBtn.addEventListener('click', (e) => {
     if (userName.value === '' || password.value === '') return;
 
     var ref = database.ref('/players/' + userName.value);
-    if (ref === null) {
-        console.log('no good');
-    }
 
     ref.once("value", snapshot => {
         if (snapshot.exists()) {
             const userData = snapshot.val();
             if (userData.password === password.value) {
                 console.log('login');
+
                 const navigator = document.querySelector('#navigator');
                 navigator.resetToPage('upcomingraces.html');
+
+                let loginId = document.getElementById('wtf');
+                loginId.innerHTML = userName.value;
+                console.log(loginId.innerHTML);
+
             } else {
                 console.log('no login for the wicked');
             }

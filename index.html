@@ -2,16 +2,91 @@
 <html>
 
 <head>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/onsenui.css">
     <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/onsen-css-components.min.css">
     <script src="https://patrickvankruistum.github.io/F1Poule/lib/js/onsenui.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
 </head>
 
 <body>
 
     <ons-page>
+        <div style="text-align: center; margin-top: 200px">
+            <p>
+                <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
+            </p>
+
+            <p>
+                <ons-input id="password" placeholder="Password" type="password" modifier="underbar">
+                </ons-input>
+            </p>
+
+            <p>
+                <ons-button>Sign in</ons-button>
+            </p>
+        </div>
+
+    </ons-page>
+
+    <!-- <main>
+        <form>
+            <label for="userId">Naam</label><br>
+            <input type="text" name="userId" id="userId"><br>
+            <label for="password">Wachtwoord</label><br>
+            <input type="password" name="password" id="password"><br>
+            <button id="addBtn">Add</button>
+        </form>
+    </main> -->
+
+
+
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBO31TRNBwxFYa9boxMowe8CytZJxI05PQ",
+            authDomain: "matemcof1poule.firebaseapp.com",
+            databaseURL: "https://matemcof1poule.firebaseio.com",
+            projectId: "matemcof1poule",
+            storageBucket: "matemcof1poule.appspot.com",
+            messagingSenderId: "359154718841",
+            appId: "1:359154718841:web:26320c8554ca3317e6dca8"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- <script src="app.js"></script> -->
+
+
+
+
+
+    <!-- <ons-page>
+        <div style="text-align: center; margin-top: 200px">
+            <p>
+                <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
+            </p>
+
+            <p>
+                <ons-input id="password" placeholder="Password" type="password" modifier="underbar">
+                </ons-input>
+            </p>
+
+            <p>
+                <ons-button>Sign in</ons-button>
+            </p>
+        </div>
+
+    </ons-page> -->
+
+    <!-- <ons-page>
         <ons-toolbar>
+            <div class="left">
+                <ons-back-button>Back</ons-back-button>
+            </div>
             <div class="center">Matemco F1 Poule 2020</div>
         </ons-toolbar>
 
@@ -23,25 +98,24 @@
 
 
         <br />
-    </ons-page>
-
-    <template id="tab1.html">
-        <ons-list>
-            <ons-list-item tappable>Austria</ons-list-item>
-            <ons-list-item tappable>Austria</ons-list-item>
-            <ons-list-item tappable>Hungary</ons-list-item>
-            <ons-list-item tappable>Silverstone</ons-list-item>
-            <ons-list-item tappable>Silverstone</ons-list-item>
-            <ons-list-item tappable>Spain</ons-list-item>
-            <ons-list-item tappable>Belgium</ons-list-item>
-            <ons-list-item tappable>Italy</ons-list-item>
-            <ons-list-header>Past races</ons-list-header>
-        </ons-list>
-    </template>
-    <template id="tab2.html">
-        <ons-list>
-        </ons-list>
-    </template>
+        <template id="tab1.html">
+            <ons-list>
+                <ons-list-item tappable>Austria</ons-list-item>
+                <ons-list-item tappable>Austria</ons-list-item>
+                <ons-list-item tappable>Hungary</ons-list-item>
+                <ons-list-item tappable>Silverstone</ons-list-item>
+                <ons-list-item tappable>Silverstone</ons-list-item>
+                <ons-list-item tappable>Spain</ons-list-item>
+                <ons-list-item tappable>Belgium</ons-list-item>
+                <ons-list-item tappable>Italy</ons-list-item>
+                <ons-list-header>Past races</ons-list-header>
+            </ons-list>
+        </template>
+        <template id="tab2.html">
+            <ons-list>
+            </ons-list>
+        </template>
+    </ons-page> -->
 
 </body>
 

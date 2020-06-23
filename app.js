@@ -13,6 +13,8 @@ signInBtn.addEventListener('click', (e) => {
 
     var ref = database.ref('/players/' + userName.value); //.toUpperCase());
 
+
+
     ref.once("value", snapshot => {
         if (snapshot.exists()) {
             const userData = snapshot.val();
@@ -30,6 +32,12 @@ signInBtn.addEventListener('click', (e) => {
     });
 
 })
+
+function CreateNewUser(userName, password) {
+    database.ref('/players/' + userName.toUpperCase()).set({
+        password: password
+    });
+}
 
 
 // (function() {

@@ -11,7 +11,7 @@ signInBtn.addEventListener('click', (e) => {
 
     if (userName.value === '' || password.value === '') return;
 
-    var ref = database.ref('/players/' + userName.value);
+    var ref = database.ref('/players/' + userName.value); //.toUpperCase());
 
     ref.once("value", snapshot => {
         if (snapshot.exists()) {
@@ -19,7 +19,7 @@ signInBtn.addEventListener('click', (e) => {
             if (userData.password === password.value) {
                 const navigator = document.querySelector('#navigator');
                 navigator.resetToPage('upcomingraces.html');
-                loginId.innerHTML = userName.value;
+                loginId.innerHTML = userName.value + '  <ons-icon id="wtf" icon="md-face" style="margin-right:20px"></ons-icon>';
             } else {
                 loginMessages.innerHTML = 'Onjuist wachtwoord.'
             }

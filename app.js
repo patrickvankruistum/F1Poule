@@ -19,7 +19,7 @@ signInBtn.addEventListener('click', (e) => {
             if (userData.password === password.value) {
                 const navigator = document.querySelector('#navigator');
                 navigator.resetToPage('upcomingraces.html');
-                loginId.innerHTML = userName.value + '  <ons-icon id="wtf" icon="md-face" style="margin-right:20px"></ons-icon>';
+                loginId.innerHTML = userName.value; // + '  <ons-icon id="wtf" icon="md-face" style="margin-right:20px"></ons-icon>';
             } else {
                 loginMessages.innerHTML = 'Onjuist wachtwoord.'
             }

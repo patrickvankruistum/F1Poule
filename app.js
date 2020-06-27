@@ -1,12 +1,3 @@
-function OnLoginPageLoad() {
-    //CreateNewUser('PKM', 'yo');
-
-}
-
-
-
-
-
 function CreateNewToken(playerId) {
     let token = GetToken(playerId);
     let expirationDate = GetExpirationDate(new Date().getFullYear());

@@ -18,118 +18,124 @@
     <script src='fbase.js'></script>
     <script src='cookies.js'></script>
     <script src='dynMainPage.js'></script>
+    <script src='dynMainRacePage.js'></script>
 </head>
 
 <body id="body" style="background-color:black">
 
-    <!-- https://stackoverflow.com/questions/22144654/add-a-login-page-in-my-onsenui-app
-    Change initial page variable? -->
-
     <ons-navigator swipeable id="navigator"></ons-navigator>
 
-    <!-- <ons-progress-circular indeterminate></ons-progress-circular> -->
-    <div>
+
+    <ons-toolbar id="toolbar">
+        <div id="backButton" class="left" style="visibility: hidden">
+            <ons-back-button></ons-back-button>
+        </div>
+        <div class="center" id="toolbarTitle">Matemco F1 2020</div>
+
+        <p class="right">
+            <input id="menuButton" type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" />
+            </ons-button>
+        </p>
+
+        <ons-progress-bar id="progressBar" style="visibility: hidden" indeterminate></ons-progress-bar>
+    </ons-toolbar>
+
+    <template id="races.html"></template>
+    <template id="race.html"></template>
+
+    <template id="main.html">
+            <ons-page>
+                <ons-tabbar position="bottom" swipeable position="auto">
+                    <ons-tab id="racesTab" page="races.html" active="true">
+                        <div class="tabName">RACES</div>
+                    </ons-tab>
+                    <ons-tab page="standPoule.html">
+                        <div class="tabName">STAND POULE</div>
+                    </ons-tab>
+                    <ons-tab page="standF1.html">
+                        <div class="tabName">STAND F1</div>
+                    </ons-tab>
+                </ons-tabbar>
+            </ons-page>
+        </template>
+
+    <template id="mainRace.html">
+            <ons-page id='mainRacePage'>
+                <ons-tabbar position="bottom" swipeable position="auto">
+                    <ons-tab id="voorspellingTab" page="race.html" active="true">
+                        <div class="tabName">VOORSPELLING</div>
+                    </ons-tab>
+                    <ons-tab page="race.html">
+                        <div class="tabName">INFO</div>
+                    </ons-tab>
+                    <ons-tab page="race.html">
+                        <div class="tabName">UITSLAG</div>
+                    </ons-tab>
+                </ons-tabbar>
+            </ons-page>
+        </template>
+
+    <template id="standPoule.html">
+            <ons-page>
+                <ons-list style="margin-top:43px">
+                    <ons-list-header>
+                        <div class="raceHeader">Stand Matemco Poule</div>
+                    </ons-list-header>
+
+                </ons-list>
+            </ons-page>
+        </template>
+
+    <template id="standF1.html">
+            <ons-page>
+                <ons-list style="margin-top:43px">
+                    <ons-list-header>
+                        <div class="raceHeader">Stand Formule 1</div>
+                    </ons-list-header>
+                </ons-list>
+            </ons-page>
+        </template>
 
 
+    <template id="login.html">
+            <ons-page id="login">
+                <div style="text-align: center; margin-top: 200px">
+                    <p>
+                        <ons-input id="loginUserName" placeholder="Gebruikersnaam" modifier="underbar"></ons-input>
+                    </p>
 
-        <ons-toolbar id="toolbar">
+                    <p>
+                        <ons-input id="loginPassword" placeholder="Wachtwoord" type="password" modifier="underbar">
+                        </ons-input>
+                    </p>
 
-
-            <div id="backButton" class="left" style="visibility: hidden">
-                <ons-back-button></ons-back-button>
-            </div>
-            <div class="center" id="toolbarTitle">Matemco F1 2020</div>
-
-            <p class="right">
-                <input id="menuButton" type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" />
-                </ons-button>
-            </p>
-
-            <ons-progress-bar id="progressBar" style="visibility: hidden" indeterminate></ons-progress-bar>
-
-
-        </ons-toolbar>
-
-
-
-
-
-        <template id="races.html"></template>
-
-        <template id="race.html"></template>
-
-        <template id="main.html">
-        <ons-page>
-            <ons-tabbar  position="bottom" swipeable position="auto">
-                <ons-tab id="racesTab"  page="races.html"  active="true"><div class="tabName">RACES</div></ons-tab>
-                <ons-tab  page="standPoule.html"><div class="tabName">STAND POULE</div></ons-tab>
-                <ons-tab  page="standF1.html"><div class="tabName">STAND F1</div></ons-tab>
-            </ons-tabbar>
-        </ons-page>
-    </template>
-
-        <template id="standPoule.html">
-        <ons-page>
-            <ons-list style="margin-top:43px">
-                <ons-list-header><div class="raceHeader">Stand Matemco Poule</div></ons-list-header>
-                    
-            </ons-list>
-        </ons-page>
-    </template>
-
-        <template id="standF1.html">
-        <ons-page>
-            <ons-list style="margin-top:43px">
-                <ons-list-header><div class="raceHeader">Stand Formule 1</div></ons-list-header>
-            </ons-list>
-        </ons-page>
-    </template>
-
-        <!-- <template id="race1.html">
-        <ons-page id="race1">
-        </ons-page>
-    </template> -->
-
-        <template id="login.html">
-        <ons-page id="login">
-            <div style="text-align: center; margin-top: 200px">
-                <p>
-                    <ons-input id="loginUserName" placeholder="Gebruikersnaam" modifier="underbar"></ons-input>
-                </p>
-
-                <p>
-                    <ons-input id="loginPassword" placeholder="Wachtwoord" type="password" modifier="underbar">
-                    </ons-input>
-                </p>
-
-                <p>
-                    <ons-button id="loginSignIn" onclick=OnSignIn()>Aanmelden</ons-button>
-                </p>
-                <p>
-                    <ons-checkbox id="loginRememberMe">Remember me</ons-checkbox>
-                </p>
-                <p>
+                    <p>
+                        <ons-button id="loginSignIn" onclick=OnSignIn()>Aanmelden</ons-button>
+                    </p>
+                    <p>
+                        <ons-checkbox id="loginRememberMe">Remember me</ons-checkbox>
+                    </p>
+                    <p>
                     <div id="loginMessages"></div>
-                </p>
-            </div>
-        </ons-page>
-    </template>
+                    </p>
+                </div>
+            </ons-page>
+        </template>
 
 
-        <ons-popover direction="down" id="popover">
-            <div id='divPopover' style="padding: 1px">
-            </div>
-        </ons-popover>
-        <ons-popover direction="down" id="popoverAddUser">
-            <div id='divPopoverAddUser' style="padding: 1px">
-            </div>
-        </ons-popover>
+    <ons-popover direction="down" id="popover">
+        <div id='divPopover' style="padding: 1px">
+        </div>
+    </ons-popover>
+    <ons-popover direction="down" id="popoverAddUser">
+        <div id='divPopoverAddUser' style="padding: 1px">
+        </div>
+    </ons-popover>
 
 
-        <script src="def.js "></script>
-        <script src="login.js "></script>
-        <script src='dynMenu.js'></script>
-        <script src='test.js'></script>
+    <script src="def.js "></script>
+    <script src="login.js "></script>
+    <script src='dynMenu.js'></script>
 
 </body>
 

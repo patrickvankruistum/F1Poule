@@ -72,3 +72,11 @@ function OnAddUserSave() {
     CreateNewUser(eleInitialen.value.toUpperCase(), eleFirstName.value, elePassword.value);
     hidePopoverAddUser();
 }
+
+backButton.addEventListener('click', function(event) {
+    var id = navigator.topPage.id;
+    if (id == 'mainRacePage') {
+        ToggleBackButton(false);
+        navigator.pushPage('main.html');
+    }
+})

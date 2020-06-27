@@ -3,8 +3,21 @@
     src: url(https://patrickvankruistum.github.io/F1Poule/lib/fonts/Formula1-Bold.ttf);
 }
 
+@font-face {
+    font-family: F1Regular;
+    src: url(https://patrickvankruistum.github.io/F1Poule/lib/fonts/Formula1-Regular.ttf);
+}
+
 #toolbarTitle {
     font-family: 'F1Bold';
     size: '12';
     text-align: center;
+}
+
+.raceHeader {
+    font-family: 'F1Bold';
+}
+
+.raceButton {
+    font-family: 'F1Regular';
 }

@@ -27,46 +27,57 @@
 
     <ons-navigator swipeable id="navigator"></ons-navigator>
 
-    <ons-progress-circular indeterminate></ons-progress-circular>
-    <ons-toolbar id="toolbar">
-        <div id="backButton" class="left">
-            <ons-back-button></ons-back-button>
-        </div>
-        <div class="center" id="toolbarTitle">Matemco F1 2020</div>
+    <!-- <ons-progress-circular indeterminate></ons-progress-circular> -->
+    <div>
 
-        <p class="right">
-            <input type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" onclick=showPopover(this) />
-            <!-- <ons-button icon="md-face" modifier="quiet" style="color:white"> -->
 
-            <!-- <ons-icon id="account" size="30px" class="center" icon="md-face" style="margin-right:20px" onclick=showPopover(this) tappable></ons-icon> -->
-            </ons-button>
-        </p>
 
-    </ons-toolbar>
+        <ons-toolbar id="toolbar">
 
-    <template id="races.html"></template>
 
-    <template id="race.html"></template>
+            <div id="backButton" class="left" style="visibility: hidden">
+                <ons-back-button></ons-back-button>
+            </div>
+            <div class="center" id="toolbarTitle">Matemco F1 2020</div>
 
-    <template id="main.html">
+            <p class="right">
+                <input type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" onclick=showPopover(this)/>
+                </ons-button>
+            </p>
+
+            <ons-progress-bar id="progressBar" style="visibility: hidden" indeterminate></ons-progress-bar>
+
+
+        </ons-toolbar>
+
+
+
+
+
+        <template id="races.html"></template>
+
+        <template id="race.html"></template>
+
+        <template id="main.html">
         <ons-page>
             <ons-tabbar  position="bottom" swipeable position="auto">
-                <ons-tab id="racesTab"  page="races.html"  active="true" onload=CheckForUser()><div class="tabName">RACES</div></ons-tab>
+                <ons-tab id="racesTab"  page="races.html"  active="true"><div class="tabName">RACES</div></ons-tab>
                 <ons-tab  page="standPoule.html"><div class="tabName">STAND POULE</div></ons-tab>
                 <ons-tab  page="standF1.html"><div class="tabName">STAND F1</div></ons-tab>
             </ons-tabbar>
         </ons-page>
     </template>
 
-    <template id="standPoule.html">
+        <template id="standPoule.html">
         <ons-page>
             <ons-list style="margin-top:43px">
                 <ons-list-header><div class="raceHeader">Stand Matemco Poule</div></ons-list-header>
+                    
             </ons-list>
         </ons-page>
     </template>
 
-    <template id="standF1.html">
+        <template id="standF1.html">
         <ons-page>
             <ons-list style="margin-top:43px">
                 <ons-list-header><div class="raceHeader">Stand Formule 1</div></ons-list-header>
@@ -74,12 +85,12 @@
         </ons-page>
     </template>
 
-    <!-- <template id="race1.html">
+        <!-- <template id="race1.html">
         <ons-page id="race1">
         </ons-page>
     </template> -->
 
-    <template id="login.html">
+        <template id="login.html">
         <ons-page id="login">
             <div style="text-align: center; margin-top: 200px">
                 <p>
@@ -104,19 +115,19 @@
         </ons-page>
     </template>
 
-    <ons-popover direction="down" id="popover">
-        <div style="padding: 1px">
-            <ons-list>
-                <ons-list-header class="menuItem" id="loginId">null</ons-list-header>
-                <ons-list-item class="menuItem" onclick=SignOut() tappable>Afmelden</ons-list-item>
-                <ons-list-item class="menuItem" onclick=hidePopover() tappable>Menu sluiten</ons-list-item>
-            </ons-list>
-        </div>
-    </ons-popover>
+        <ons-popover direction="down" id="popover">
+            <div style="padding: 1px">
+                <ons-list>
+                    <ons-list-header class="menuItem" id="loginId">null</ons-list-header>
+                    <ons-list-item class="menuItem" onclick=SignOut() tappable>Afmelden</ons-list-item>
+                    <ons-list-item class="menuItem" onclick=hidePopover() tappable>Menu sluiten</ons-list-item>
+                </ons-list>
+            </div>
+        </ons-popover>
 
-    <script src="def.js "></script>
-    <script src="login.js "></script>
-    <script src='test.js'></script>
+        <script src="def.js "></script>
+        <script src="login.js "></script>
+        <script src='test.js'></script>
 
 </body>
 

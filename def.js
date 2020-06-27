@@ -6,6 +6,7 @@ const loginId = document.getElementById('loginId');
 backButton.addEventListener('click', function(event) {
     var id = navigator.topPage.id;
     if (id == 'race') {
+        ToggleBackButton(false);
         navigator.pushPage('main.html');
     }
 })

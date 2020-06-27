@@ -1,6 +1,7 @@
 var checkStart;
 (checkStart = function() {
 
+    ToggleBusyIndicator(true);
     hidePopover();
 
     var c = readCookie('token');
@@ -28,8 +29,7 @@ var checkStart;
             GoToLoginPage();
         }
     });
-
-
+    ToggleBusyIndicator(false);
 })();
 
 
@@ -37,13 +37,8 @@ var checkStart;
 
 
 function GoToMainPage(userId) {
-
     loginId.innerHTML = userId;
     ReadCircuits();
-
-    //console.log(document.getElementById('main.html').innerHTML);
-
-    //navigator.resetToPage('main.html');
 }
 
 function OnSignIn() {
@@ -89,5 +84,6 @@ function SignOut() {
 
 function GoToLoginPage() {
     //navigator.resetToPage('login.html');
+    ToggleBackButton(false);
     navigator.pushPage('login.html');
 }

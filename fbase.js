@@ -104,6 +104,7 @@ function GetRacePage(sender) {
             page.innerHTML = ConstructRacePage(raceData);
         }
         navigator.pushPage('race.html');
+        ToggleBackButton(true);
     });
 }
 

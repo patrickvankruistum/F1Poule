@@ -63,3 +63,15 @@ function GetToken(playerId) {
 function GetExpirationDate(year) {
     return new Date(year, 11, 31, 23, 59, 59, 0);
 }
+
+function ToggleBackButton(visible) {
+    let element = document.getElementById('backButton');
+    if (visible) element.setAttribute('style', 'visibility: visible');
+    else element.setAttribute('style', 'visibility: hidden');
+}
+
+function ToggleBusyIndicator(visible) {
+    let element = document.getElementById('progressBar');
+    if (visible) element.setAttribute('style', 'visibility: visible');
+    else element.setAttribute('style', 'visibility: hidden');
+}

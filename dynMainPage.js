@@ -23,7 +23,7 @@ function CreateCircuitElement(data, key) {
 
 function ConstructMainPage(circuits) {
     let text = '';
-    text += '<ons-page id="races" onload=CheckForUser()>';
+    text += '<ons-page id="races")>';
     text += ConstructMainPageContent(circuits);
     //text += ConstructMainTab();
     text += '</ons-page>'
@@ -51,8 +51,4 @@ function ConstructMainPageListUpcomingRaces(circuits) {
     text += '<ons-list-header><div class="raceHeader">Upcoming races</div></ons-list-header>';
     text += circuits;
     return text;
-}
-
-function CheckForUser() {
-    console.log('Active user: "' + currentUsr + '"');
 }

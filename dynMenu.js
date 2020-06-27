@@ -61,7 +61,11 @@ function OnAddUserSave() {
     if (eleInitialen.value === '' || eleFirstName === '' || elePassword === '') return;
     else if (eleInitialen.value.length != 3) return;
 
-    CreateNewUser(eleInitialen.value, eleFirstName.value, elePassword.value);
+    CreateNewUser(eleInitialen.value.toUpperCase(), eleFirstName.value, elePassword.value);
+
+    eleInitialen.value = '';
+    eleFirstName.value = '';
+    elePassword.value = '';
 
     hidePopoverAddUser();
 }

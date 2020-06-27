@@ -13,6 +13,9 @@
 // });
 
 var showPopover = function(target) {
+
+    if (currentUsr == '') return;
+
     document
         .getElementById('popover')
         .show(target);

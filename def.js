@@ -16,4 +16,4 @@ backButton.addEventListener('click', function(event) {
     }
 })
 
-var currentUsr;
+var currentUsr = '';

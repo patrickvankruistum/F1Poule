@@ -1,7 +1,9 @@
 var checkStart;
 (checkStart = function() {
     var c = readCookie('token');
+
     if (c != null) {
+        alert(c);
         currentUsr = c.substring(0, 3);
 
         database.ref('tokens').orderByChild('token').equalTo(c).on("value", function(snapshot) {
@@ -10,7 +12,7 @@ var checkStart;
                     eraseCookie('token');
                     GoToLoginPage();
                 } else {
-                    //GoToLoginPage();
+                    alert(currentUsr);
                     GoToMainPage(currentUsr);
                 }
             });

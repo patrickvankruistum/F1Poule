@@ -1,8 +1,8 @@
 @font-face {
     font-family: F1Bold;
-    src: url(../Formula1-Bold.tff);
+    src: url(https://patrickvankruistum.github.io/F1Poule/lib/fonts/Formula1-Bold.ttf);
 }
 
 #toolbarTitle {
-    font-family: 'Serif';
+    font-family: 'F1Bold';
 }

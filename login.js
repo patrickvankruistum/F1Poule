@@ -34,13 +34,13 @@ var checkStart;
 
 
 
-function GoToLoginPage() {
-    navigator.resetToPage('login.html');
-}
+
 
 function GoToMainPage(userId) {
+
     loginId.innerHTML = userId;
     ReadCircuits();
+
     //console.log(document.getElementById('main.html').innerHTML);
 
     //navigator.resetToPage('main.html');
@@ -66,8 +66,7 @@ function OnSignIn() {
                 if (rememberMe.checked) {
                     CreateNewToken(currentUsr);
                 }
-                loginId.innerHTML = currentUsr;
-                navigator.resetToPage('main.html');
+                GoToMainPage(currentUsr);
 
             } else {
                 loginMessages.innerHTML = 'Onjuist wachtwoord.'
@@ -86,4 +85,9 @@ function SignOut() {
     currentUsr = '';
     hidePopover();
     GoToLoginPage();
+}
+
+function GoToLoginPage() {
+    navigator.resetToPage('login.html');
+    //navigator.pushPage('login.html');
 }

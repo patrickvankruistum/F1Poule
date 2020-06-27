@@ -31,6 +31,7 @@
 .raceAllInfo {
     /* background-color: purple; */
     margin-bottom: 1px;
+    min-width: 600px;
 }
 
 .raceFirstInfo {
@@ -56,7 +57,8 @@
 }
 
 .raceCircuitName {
+    /* min-width: 200px; */
     font-family: 'F1Bold';
     color: rgb(77, 77, 77);
-    font-size: 12px;
+    font-size: 10px;
 }

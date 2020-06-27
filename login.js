@@ -1,5 +1,8 @@
 var checkStart;
 (checkStart = function() {
+
+    hidePopover();
+
     var c = readCookie('token');
 
     if (c == null) {

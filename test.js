@@ -11,18 +11,3 @@
 //         //page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 //     }
 // });
-
-var showPopover = function(target) {
-
-    if (currentUsr == '') return;
-
-    document
-        .getElementById('popover')
-        .show(target);
-};
-
-var hidePopover = function() {
-    document
-        .getElementById('popover')
-        .hide();
-};

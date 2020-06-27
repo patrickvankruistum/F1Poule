@@ -16,8 +16,47 @@
 
 .raceHeader {
     font-family: 'F1Bold';
+    color: red;
 }
 
 .raceButton {
     font-family: 'F1Regular';
+}
+
+.menuItem {
+    font-family: 'F1Regular';
+    font-size: 12px;
+}
+
+.raceAllInfo {
+    /* background-color: purple; */
+    margin-bottom: 1px;
+}
+
+.raceFirstInfo {
+    font-family: 'F1Bold';
+    width: 75px;
+    height: 40px;
+    text-align: center;
+    font-size: 12px;
+    /* background-color: green; */
+    float: left;
+}
+
+.raceDateInfo {
+    font-size: 10px;
+}
+
+.raceSecondInfo {
+    margin-left: 20px;
+    /* background-color: blue; */
+    float: left;
+    /* vertical-align: middle; */
+    /* line-height: 35px; */
+}
+
+.raceCircuitName {
+    font-family: 'F1Bold';
+    color: rgb(77, 77, 77);
+    font-size: 12px;
 }

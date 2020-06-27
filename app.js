@@ -3,6 +3,21 @@ function OnLoginPageLoad() {
 
 }
 
+var showPopover = function(target) {
+
+    if (currentUsr == '') return;
+
+    document
+        .getElementById('popover')
+        .show(target);
+};
+
+var hidePopover = function() {
+    document
+        .getElementById('popover')
+        .hide();
+};
+
 function myFunction() {
     navigator.pushPage('race1.html', { data: { title: 'Austriaa' } });
 }

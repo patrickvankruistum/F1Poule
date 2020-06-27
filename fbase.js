@@ -53,93 +53,70 @@ function RemoveOldTokensFromDatabase() {
 }
 
 function ReadCircuits() {
-    let nav = document.getElementById('main.html');
+    let nav = document.getElementById('races.html');
     let r = database.ref('races');
-    let circuit = '';
+    let circuits = '';
     r.once("value", function(snapshot) {
         snapshot.forEach(function(data) {
-            circuit += CreateCircuitElement(snapshot.child(data.key).val());
-
-            //CreateCircuitElement(nav, snapshot.child(data.key).val());
-
+            circuits += CreateCircuitElement(snapshot.child(data.key).val(), data.key);
         });
-        nav.innerHTML = KantEnKlaar2(circuit);
+        nav.innerHTML = ConstructMainPage(circuits);
+
+        // let element = document.getElementById('mainTab1');
+        // let element2 = document.getElementById('mainTab2');
+
+        // element.setAttribute('page', 'main.html')
+        // element2.setAttribute('page', 'login.html')
+
+        // console.log(element.getAttribute('page'));
+
+
+
+        // element.innerHTML = '<ons-tab label="Tab 1"></ons-tab>'
+        // console.log(element.innerHTML);
+        //document.getElementById('mainTab').innerHTML = '<ons-tab id="mainTab1" page="" label="Tab 1" active></ons-tab>';
+        //navigator.pushPage('main.html');
         navigator.pushPage('main.html');
     });
-
-    //console.log('Static: ' + CreateStaticCircuitElement());
-
-    // 
-    // var div = document.createElement('div');
-    // div.innerHTML = 'bladiebla';
-
-    // nav.append(div);
-    // console.log(div.innerHTML);
-    // var div = document.createElement('div');
-    // div.innerHTML = '<ons-button>asdasd</ons-button>';
-    // nav.appendChild(div);
-    // console.log(nav.innerHTML);
-
-
-    //nav.innerHTML += 'arasdasdg';
-    //console.log('ReadCircuits: ' + KantEnKlaar2(GetCircuitMenuButtons()));
-
-    //nav.innerHTML = KantEnKlaar();
-    // nav.innerHTML += '</ons-list style></ons-page>';
-    //ons.compile(nav);
 }
 
+// function ConstructMainTab() {
+//     let text = '';
+//     text += '<ons-tabbar>'
+//     text += '<ons-tab page="main.html" label="Races" icon="ion-home, material:md-home" active></ons-tab>'
+//     text += '<ons-tab page="main.html" label="Stand poule" icon="ion-home, material:md-home"></ons-tab>'
+//     text += '</ons-tabbar>'
+//     return text;
+// }
 
 
-function CreateCircuitElement(data) {
-    let circuit = data.Circuit.toString().toUpperCase();
-    let land = data.Land.toString();
-    let dagen = data.Dagen.toString();
-    let maand = data.Maand.toString().toUpperCase();
+
+//ddddddddddddddd
+
+function GetRacePage(sender) {
+    let page = document.getElementById('race.html');
+    let record = sender.getAttribute('record');
+
+    let ref = database.ref('/races/' + record);
+    ref.once("value", snapshot => {
+        if (snapshot.exists()) {
+            const raceData = snapshot.val();
+            page.innerHTML = ConstructRacePage(raceData);
+        }
+        navigator.pushPage('race.html');
+    });
+}
+
+function ConstructRacePage(raceData) {
+    return '<ons-page id="race">' + ConstructRaceSpecificPage(raceData) + '</ons-page>'
+}
+
+function ConstructRaceSpecificPage(raceData) {
     let text = '';
-
-    text += '<ons-list-item class="raceButton" tappable onclick=myFunction()>';
-    text += '<div class="raceAllInfo">';
-    text += '<div class="raceFirstInfo">';
-    text += '<div>' + dagen + '</div>';
-    text += '<div class="raceDateInfo">' + maand + '</div>';
+    text += '<div style="margin-top:60px">' + raceData.Land + '</div>'
+    text += '<div>';
+    text += '<ons-select id="choose-sel" onchange="editSelects(event)"><option value="basic">Basic</option><option value="material">Material</option><option value="underbar">Underbar</option></ons-select>';
     text += '</div>';
-    text += '<div class="raceSecondInfo">';
-    text += '<div>' + land + '</div>';
-    text += '<div class="raceCircuitName">' + circuit + '</div>';
-    text += '</div>';
-    text += '</div>';
-    text += '</ons-list-item>';
 
     return text;
-}
-
-function KantEnKlaar2(CircuitMenuButtons) {
-    return '<ons-page id="main"><ons-list id="mainList" style="margin-top:60px"><ons-list-header><div class="raceHeader">Upcoming races</div></ons-list-header>' + CircuitMenuButtons + '</ons-list></ons-page>';
-}
-
-function KantEnKlaar3(circuits) {
-    return '<ons-page id="main"><ons-list id="mainList" style="margin-top:60px"><ons-list-header><div class="raceHeader">Upcoming races</div></ons-list-header>' + CircuitMenuButtons + '<ons-list-item class="raceButton" tappable onclick=myFunction()><div class="raceAllInfo"><div class="raceFirstInfo"><div>03-05</div><div class="raceDateInfo">JUL.</div></div><div class="raceSecondInfo"><div>Oostenrijk</div><div class="raceCircuitName">RED BULL RING</div></div></div></ons-list-item></ons-list></ons-page>';
-}
-
-
-function CreateStaticCircuitElement() {
-    var text;
-    text = '<ons-list-item class="raceButton" tappable onclick=myFunction()>';
-    text += '<div class="raceAllInfo">';
-    text += '<div class="raceFirstInfo">';
-    text += '<div>03-05</div>';
-    text += '<div class="raceDateInfo">JUL.</div>';
-    text += '</div>';
-    text += '<div class="raceSecondInfo">';
-    text += '<div>Oostenrijk</div>';
-    text += '<div class="raceCircuitName">RED BULL RING</div>';
-    text += '</div>';
-    text += '</div>';
-    text += '</ons-list-item>';
-    return text;
-}
-
-function KantEnKlaar() {
-    return '<ons-page id="main"><ons-list id="mainList" style="margin-top:60px"><ons-list-header><div class="raceHeader">Upcoming races</div></ons-list-header><ons-list-item class="raceButton" tappable onclick=myFunction()><div class="raceAllInfo"><div class="raceFirstInfo"><div>03-05</div><div class="raceDateInfo">JUL.</div></div><div class="raceSecondInfo"><div>Oostenrijk</div><div class="raceCircuitName">RED BULL RING</div></div></div></ons-list-item></ons-list></ons-page>';
 }

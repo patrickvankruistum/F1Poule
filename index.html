@@ -17,6 +17,7 @@
     <script src="app.js"></script>
     <script src='fbase.js'></script>
     <script src='cookies.js'></script>
+    <script src='dynMainPage.js'></script>
 </head>
 
 <body>
@@ -26,9 +27,10 @@
 
     <ons-navigator swipeable id="navigator"></ons-navigator>
 
+
     <ons-toolbar id="toolbar">
         <div id="backButton" class="left">
-            <ons-back-button>Back</ons-back-button>
+            <ons-back-button></ons-back-button>
         </div>
         <div class="center" id="toolbarTitle">Matemco F1 2020</div>
 
@@ -42,15 +44,34 @@
 
     </ons-toolbar>
 
-    <template id="main.html">
-        
-        
-    </template>
 
-    <template id="race1.html">
-        <ons-page id="race1">
+
+
+    <template id="races.html"></template>
+
+    <template id="race.html"></template>
+
+    <template id="main.html">
+        <ons-page>
+            <ons-tabbar  position="bottom">
+                <ons-tab class="tabName" page="races.html"  active="true">Races</ons-tab>
+                <ons-tab class="tabName" page="stand.html">Stand poule</ons-tab>
+            </ons-tabbar>
         </ons-page>
     </template>
+
+    <template id="stand.html">
+        <ons-page>
+            <ons-list id="mainList" style="margin-top:43px">
+                <ons-list-header><div class="raceHeader">Stand Matemco Poule</div></ons-list-header>
+            </ons-list>
+        </ons-page>
+    </template>
+
+    <!-- <template id="race1.html">
+        <ons-page id="race1">
+        </ons-page>
+    </template> -->
 
     <template id="login.html">
         <ons-page id="login">

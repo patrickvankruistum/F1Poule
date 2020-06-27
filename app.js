@@ -18,9 +18,7 @@ var hidePopover = function() {
         .hide();
 };
 
-function myFunction() {
-    navigator.pushPage('race1.html', { data: { title: 'Austriaa' } });
-}
+
 
 function CreateNewUser(userName, password) {
     database.ref('/players/' + userName.toUpperCase()).set({

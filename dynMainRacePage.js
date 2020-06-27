@@ -27,7 +27,7 @@ function ConstructMainRacePageListVoorspelling(raceData) {
     let text = ''
     text += '<ons-list-header><div class="raceHeader">' + raceData.Land + '</div></ons-list-header>';
     text += '<ons-list-header><div>Pole Position</div></ons-list-header>';
-    text += ConstructMainRacePageListItem('1.');
+    text += ConstructMainRacePageListItem('PP');
     // text += '<ons-list-header><div>Snelste ronde race</div></ons-list-header>';
     // text += ConstructMainRacePageListItem('1.');
     // text += '<ons-list-header><div>Uitslag race</div></ons-list-header>';

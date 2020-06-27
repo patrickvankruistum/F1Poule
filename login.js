@@ -2,25 +2,34 @@ var checkStart;
 (checkStart = function() {
     var c = readCookie('token');
 
-    if (c != null) {
-        alert(c);
-        currentUsr = c.substring(0, 3);
-
-        database.ref('tokens').orderByChild('token').equalTo(c).on("value", function(snapshot) {
-            snapshot.forEach(function(data) {
-                if (data.key == null) {
-                    eraseCookie('token');
-                    GoToLoginPage();
-                } else {
-                    alert(currentUsr);
-                    GoToMainPage(currentUsr);
-                }
-            });
-        });
-    } else {
+    if (c == null) {
         GoToLoginPage();
+        return;
     }
+
+    currentUsr = c.substring(0, 3);
+
+    RemoveOldTokensFromDatabase();
+
+    let keyFound = false;
+    database.ref('tokens').orderByChild('token').equalTo(c).on("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+            if (data.key != null) {
+                keyFound = true;
+            }
+        });
+        if (keyFound) {
+            GoToMainPage(currentUsr);
+        } else {
+            eraseCookie('token');
+            GoToLoginPage();
+        }
+    });
+
+
 })();
+
+
 
 function GoToLoginPage() {
     navigator.resetToPage('login.html');
@@ -31,36 +40,44 @@ function GoToMainPage(userId) {
     navigator.resetToPage('main.html');
 }
 
-// signInBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
+function OnSignIn() {
 
-//     currentUsr = userName.value.toUpperCase();
+    currentUsr = document.getElementById('loginUserName').value.toUpperCase();
 
-//     if (currentUsr === '' || password.value === '') return;
+    let password = document.getElementById('loginPassword');
+    let rememberMe = document.getElementById('loginRememberMe');
+    let loginMessages = document.getElementById('loginMessages');
 
-//     var ref = database.ref('/players/' + currentUsr);
+    if (currentUsr === '' || password.value === '') return;
 
-//     ref.once("value", snapshot => {
-//         if (snapshot.exists()) {
-//             const userData = snapshot.val();
-//             if (userData.password === password.value) {
+    var ref = database.ref('/players/' + currentUsr);
 
-//                 if (rememberMe.checked) {
-//                     CreateNewToken(currentUsr);
-//                 }
+    ref.once("value", snapshot => {
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            if (userData.password === password.value) {
 
-//                 const navigator = document.querySelector('#navigator');
-//                 loginId.innerHTML = currentUsr;
-//                 navigator.resetToPage('upcomingraces.html');
+                if (rememberMe.checked) {
+                    CreateNewToken(currentUsr);
+                }
+                loginId.innerHTML = currentUsr;
+                navigator.resetToPage('main.html');
 
-//             } else {
-//                 loginMessages.innerHTML = 'Onjuist wachtwoord.'
-//                 return;
-//             }
-//         } else {
-//             loginMessages.innerHTML = 'Gebruikersnaam bestaat niet.'
-//             return;
-//         }
-//     });
+            } else {
+                loginMessages.innerHTML = 'Onjuist wachtwoord.'
+                return;
+            }
+        } else {
+            loginMessages.innerHTML = 'Gebruikersnaam bestaat niet.'
+            return;
+        }
+    });
+}
 
-// })
+function SignOut() {
+    eraseDatabaseToken();
+    eraseCookie('token');
+    currentUsr = '';
+    hidePopover();
+    GoToLoginPage();
+}

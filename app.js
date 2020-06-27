@@ -4,8 +4,6 @@ function OnLoginPageLoad() {
 }
 
 function myFunction() {
-    // const navigator = document.querySelector('#navigator');
-    // navigator.resetToPage('race1.html');
     navigator.pushPage('race1.html', { data: { title: 'Austriaa' } });
 }
 
@@ -16,20 +14,13 @@ function CreateNewUser(userName, password) {
 }
 
 function CreateNewToken(playerId) {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    var n = String(today.getMinutes()).padStart(2, '0');
-    var s = String(today.getSeconds()).padStart(2, '0');
-
-    var token = playerId + ':' + GenerateToken(128, '123456789abcdefghijklmnopqrstuvwxyz') + yyyy + mm + dd + n + s;
-    var expirationDate = new Date(today.getFullYear(), 11, 31, 23, 59, 59, 0);
-
-    var messageListRef = firebase.database().ref('/tokens/');
-    var newMessageRef = messageListRef.push();
+    let token = GetToken(playerId);
+    let expirationDate = GetExpirationDate(new Date().getFullYear());
+    let messageListRef = firebase.database().ref('/tokens/');
+    let newMessageRef = messageListRef.push();
     newMessageRef.set({
         'player_id': playerId.toUpperCase(),
+        'expirationDate': expirationDate.toString(),
         'token': token
     });
 
@@ -43,4 +34,19 @@ function GenerateToken(len, arr) {
             arr[Math.floor(Math.random() * arr.length)];
     }
     return ans;
+}
+
+function GetToken(playerId) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var n = String(today.getMinutes()).padStart(2, '0');
+    var s = String(today.getSeconds()).padStart(2, '0');
+
+    return playerId + ':' + GenerateToken(128, '123456789abcdefghijklmnopqrstuvwxyz') + yyyy + mm + dd + n + s;
+}
+
+function GetExpirationDate(year) {
+    return new Date(year, 11, 31, 23, 59, 59, 0);
 }

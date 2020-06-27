@@ -24,3 +24,30 @@
 }());
 
 const database = firebase.database();
+
+function eraseDatabaseToken() {
+    var c = readCookie('token');
+    if (c == null) return;
+
+    var r = database.ref('tokens');
+    database.ref('tokens').orderByChild('token').equalTo(c).on("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+            if (data.key != null) {
+                r.child(data.key).remove();
+            }
+        });
+    });
+
+}
+
+function RemoveOldTokensFromDatabase() {
+    var r = database.ref('tokens');
+    database.ref('tokens').on("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+            var date = Date.parse(snapshot.child(data.key).val().expirationDate);
+            if (date < new Date()) {
+                r.child(data.key).remove();
+            }
+        });
+    });
+}

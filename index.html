@@ -63,7 +63,7 @@
     <template id="race1.html">
         <ons-page id="race1">
         </ons-page>
-      </template>
+    </template>
 
     <template id="login.html">
         <ons-page id="login">
@@ -77,11 +77,11 @@
                     </ons-input>
                 </p>
 
-                <p>              
-                    <ons-button id="loginSignIn">Aanmelden</ons-button>
+                <p>
+                    <ons-button id="loginSignIn" onclick=OnSignIn()>Aanmelden</ons-button>
                 </p>
                 <p>
-                    <ons-checkbox id="loginRememberMe" checked>Remember me</ons-checkbox>
+                    <ons-checkbox id="loginRememberMe">Remember me</ons-checkbox>
                 </p>
                 <p>
                     <div id="loginMessages"></div>
@@ -94,20 +94,11 @@
         <div style="padding: 10px; text-align: center;">
             <ons-list>
                 <ons-list-header id="loginId">null</ons-list-header>
-                <ons-list-item onclick=hidePopover() tappable>Afmelden</ons-list-item>
+                <ons-list-item onclick=SignOut() tappable>Afmelden</ons-list-item>
                 <ons-list-item onclick=hidePopover() tappable>Menu sluiten</ons-list-item>
             </ons-list>
         </div>
     </ons-popover>
-
-    <!-- <ons-template id="popover.html">
-        <ons-popover direction="down" id="popover" cancelable>
-            <ons-list>
-                <ons-list-item modifier="tappable ">Option 1</ons-list-item>
-                <ons-list-item modifier="tappable ">Option 2</ons-list-item>
-            </ons-list>
-        </ons-popover>
-    </ons-template> -->
 
     <script src="def.js "></script>
     <script src="login.js "></script>

@@ -107,7 +107,7 @@
 .driverPicture {
     height: 45px;
     float: left;
-    content: url('../lib/img/verstappen.png');
+    content: url('https://patrickvankruistum.github.io/F1Poule/lib//lib/img/verstappen.png');
     width: 50px;
     height: 50px;
     /* background-color: purple; */
@@ -141,7 +141,7 @@
 .driverFlag {
     float: right;
     /* z-index: -1; */
-    content: url('../lib/img/nederland.jpg');
+    content: url('https://patrickvankruistum.github.io/F1Poule/lib//lib/img/nederland.jpg');
     width: 40px;
     margin-right: 10px;
     margin-top: 7px;

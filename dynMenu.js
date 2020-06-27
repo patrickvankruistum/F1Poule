@@ -45,6 +45,14 @@ function showPopoverAddUser(target) {
 }
 
 function hidePopoverAddUser() {
+    let eleInitialen = document.getElementById('addUserInitials');
+    let eleFirstName = document.getElementById('addUserFirstName');
+    let elePassword = document.getElementById('addUserPassword');
+
+    eleInitialen.value = '';
+    eleFirstName.value = '';
+    elePassword.value = '';
+
     document.getElementById('popoverAddUser').hide();
 }
 
@@ -62,10 +70,5 @@ function OnAddUserSave() {
     else if (eleInitialen.value.length != 3) return;
 
     CreateNewUser(eleInitialen.value.toUpperCase(), eleFirstName.value, elePassword.value);
-
-    eleInitialen.value = '';
-    eleFirstName.value = '';
-    elePassword.value = '';
-
     hidePopoverAddUser();
 }

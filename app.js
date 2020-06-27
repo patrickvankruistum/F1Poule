@@ -3,28 +3,9 @@ function OnLoginPageLoad() {
 
 }
 
-var showPopover = function(target) {
-
-    if (currentUsr == '') return;
-
-    document
-        .getElementById('popover')
-        .show(target);
-};
-
-var hidePopover = function() {
-    document
-        .getElementById('popover')
-        .hide();
-};
 
 
 
-function CreateNewUser(userName, password) {
-    database.ref('/players/' + userName.toUpperCase()).set({
-        password: password
-    });
-}
 
 function CreateNewToken(playerId) {
     let token = GetToken(playerId);

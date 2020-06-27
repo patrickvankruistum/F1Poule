@@ -48,7 +48,7 @@ function ConstructMainPageList(circuits) {
 
 function ConstructMainPageListUpcomingRaces(circuits) {
     let text = ''
-    text += '<ons-list-header><div class="raceHeader">Upcoming races</div></ons-list-header>';
+    text += '<ons-list-header><div class="raceHeader">Aankomende Grand-Prix</div></ons-list-header>';
     text += circuits;
     return text;
 }

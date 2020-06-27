@@ -20,7 +20,7 @@
     <script src='dynMainPage.js'></script>
 </head>
 
-<body style="background-color:black">
+<body id="body" style="background-color:black">
 
     <!-- https://stackoverflow.com/questions/22144654/add-a-login-page-in-my-onsenui-app
     Change initial page variable? -->
@@ -41,7 +41,7 @@
             <div class="center" id="toolbarTitle">Matemco F1 2020</div>
 
             <p class="right">
-                <input type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" onclick=showPopover(this)/>
+                <input id="menuButton" type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" />
                 </ons-button>
             </p>
 
@@ -115,18 +115,20 @@
         </ons-page>
     </template>
 
+
         <ons-popover direction="down" id="popover">
-            <div style="padding: 1px">
-                <ons-list>
-                    <ons-list-header class="menuItem" id="loginId">null</ons-list-header>
-                    <ons-list-item class="menuItem" onclick=SignOut() tappable>Afmelden</ons-list-item>
-                    <ons-list-item class="menuItem" onclick=hidePopover() tappable>Menu sluiten</ons-list-item>
-                </ons-list>
+            <div id='divPopover' style="padding: 1px">
+            </div>
+        </ons-popover>
+        <ons-popover direction="down" id="popoverAddUser">
+            <div id='divPopoverAddUser' style="padding: 1px">
             </div>
         </ons-popover>
 
+
         <script src="def.js "></script>
         <script src="login.js "></script>
+        <script src='dynMenu.js'></script>
         <script src='test.js'></script>
 
 </body>

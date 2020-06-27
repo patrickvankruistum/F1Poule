@@ -2,12 +2,13 @@ var checkStart;
 (checkStart = function() {
 
     ToggleBusyIndicator(true);
-    hidePopover();
+    //hidePopover();
 
     var c = readCookie('token');
 
     if (c == null) {
         GoToLoginPage();
+        ToggleBusyIndicator(false);
         return;
     }
 
@@ -37,7 +38,7 @@ var checkStart;
 
 
 function GoToMainPage(userId) {
-    loginId.innerHTML = userId;
+    //loginId.innerHTML = userId;
     ReadCircuits();
 }
 
@@ -61,6 +62,8 @@ function OnSignIn() {
                 if (rememberMe.checked) {
                     CreateNewToken(currentUsr);
                 }
+
+                document.getElementById('loginId').innerHTML = currentUsr;
                 GoToMainPage(currentUsr);
 
             } else {

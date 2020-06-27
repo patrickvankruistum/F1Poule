@@ -121,3 +121,13 @@ function ConstructRaceSpecificPage(raceData) {
 
     return text;
 }
+
+function CreateNewUser(userName, firstName, password) {
+
+    if (userName === '' || firstName === '' || password === '') return;
+
+    database.ref('/players/' + userName.toUpperCase()).set({
+        firstname: firstName,
+        password: password
+    });
+}

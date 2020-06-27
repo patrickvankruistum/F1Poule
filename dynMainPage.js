@@ -38,8 +38,9 @@ function ConstructMainPageContent(circuits) {
 }
 
 function ConstructMainPageList(circuits) {
+    let h = document.getElementById('toolbar').getBoundingClientRect().height;
     let text = '';
-    text += '<ons-list id="mainList" style="margin-top:43px">';
+    text += '<ons-list id="mainList" style="margin-top:' + h + 'px">';
     text += ConstructMainPageListUpcomingRaces(circuits);
     text += '</ons-list>'
     return text;

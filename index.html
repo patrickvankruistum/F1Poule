@@ -55,15 +55,24 @@
         <ons-page>
             <ons-tabbar  position="bottom">
                 <ons-tab  page="races.html"  active="true"><div class="tabName">RACES</div></ons-tab>
-                <ons-tab  page="stand.html"><div class="tabName">STAND POULE</div>/ons-tab>
+                <ons-tab  page="standPoule.html"><div class="tabName">STAND POULE</div></ons-tab>
+                <ons-tab  page="standF1.html"><div class="tabName">STAND F1</div></ons-tab>
             </ons-tabbar>
         </ons-page>
     </template>
 
-    <template id="stand.html">
+    <template id="standPoule.html">
         <ons-page>
-            <ons-list id="mainList" style="margin-top:43px">
+            <ons-list style="margin-top:43px">
                 <ons-list-header><div class="raceHeader">Stand Matemco Poule</div></ons-list-header>
+            </ons-list>
+        </ons-page>
+    </template>
+
+    <template id="standF1.html">
+        <ons-page>
+            <ons-list style="margin-top:43px">
+                <ons-list-header><div class="raceHeader">Stand F1</div></ons-list-header>
             </ons-list>
         </ons-page>
     </template>

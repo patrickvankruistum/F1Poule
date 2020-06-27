@@ -20,14 +20,14 @@
     <script src='dynMainPage.js'></script>
 </head>
 
-<body>
+<body style="background-color:black">
 
     <!-- https://stackoverflow.com/questions/22144654/add-a-login-page-in-my-onsenui-app
     Change initial page variable? -->
 
     <ons-navigator swipeable id="navigator"></ons-navigator>
 
-
+    <ons-progress-circular indeterminate></ons-progress-circular>
     <ons-toolbar id="toolbar">
         <div id="backButton" class="left">
             <ons-back-button></ons-back-button>
@@ -51,7 +51,7 @@
     <template id="main.html">
         <ons-page>
             <ons-tabbar  position="bottom">
-                <ons-tab  page="races.html"  active="true"><div class="tabName">RACES</div></ons-tab>
+                <ons-tab id="racesTab"  page="races.html"  active="true" onload=CheckForUser()><div class="tabName">RACES</div></ons-tab>
                 <ons-tab  page="standPoule.html"><div class="tabName">STAND POULE</div></ons-tab>
                 <ons-tab  page="standF1.html"><div class="tabName">STAND F1</div></ons-tab>
             </ons-tabbar>

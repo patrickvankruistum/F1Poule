@@ -88,6 +88,6 @@ function SignOut() {
 }
 
 function GoToLoginPage() {
-    navigator.resetToPage('login.html');
-    //navigator.pushPage('login.html');
+    //navigator.resetToPage('login.html');
+    navigator.pushPage('login.html');
 }

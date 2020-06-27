@@ -28,14 +28,14 @@ function ConstructMainRacePageListVoorspelling(raceData) {
     text += '<ons-list-header><div class="raceHeader">' + raceData.Land + '</div></ons-list-header>';
     text += '<ons-list-header><div>Pole Position</div></ons-list-header>';
     text += ConstructMainRacePageListItem('PP');
-    // text += '<ons-list-header><div>Snelste ronde race</div></ons-list-header>';
-    // text += ConstructMainRacePageListItem('1.');
-    // text += '<ons-list-header><div>Uitslag race</div></ons-list-header>';
+    text += '<ons-list-header><div>Snelste Race Ronde</div></ons-list-header>';
+    text += ConstructMainRacePageListItem('FL');
+    text += '<ons-list-header><div>Uitslag race</div></ons-list-header>';
 
-    // var i;
-    // for (i = 1; i <= 10; i++) {
-    //     text += ConstructMainRacePageListItem(i.toString() + '.');
-    // }
+    var i;
+    for (i = 1; i <= 10; i++) {
+        text += ConstructMainRacePageListItem(i.toString());
+    }
 
     return text;
 }

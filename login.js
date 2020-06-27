@@ -40,7 +40,10 @@ function GoToLoginPage() {
 
 function GoToMainPage(userId) {
     loginId.innerHTML = userId;
-    navigator.resetToPage('main.html');
+    ReadCircuits();
+    //console.log(document.getElementById('main.html').innerHTML);
+
+    //navigator.resetToPage('main.html');
 }
 
 function OnSignIn() {

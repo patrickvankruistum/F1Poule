@@ -1,0 +1,8 @@
+@font-face {
+    font-family: F1Bold;
+    src: url(../Formula1-Bold.tff);
+}
+
+#toolbarTitle {
+    font-family: 'Serif';
+}

@@ -1,37 +1,13 @@
-const userName = document.getElementById('userName');
-const password = document.getElementById('password');
-const signInBtn = document.getElementById('signIn');
-const loginId = document.getElementById('wtf');
-const loginMessages = document.getElementById('loginMessages');
+function OnLoginPageLoad() {
+    //CreateNewUser('PKM', 'yo');
 
-const database = firebase.database();
+}
 
-signInBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    if (userName.value === '' || password.value === '') return;
-
-    var ref = database.ref('/players/' + userName.value.toUpperCase()); //.toUpperCase());
-
-
-
-    ref.once("value", snapshot => {
-        if (snapshot.exists()) {
-            const userData = snapshot.val();
-            if (userData.password === password.value) {
-                const navigator = document.querySelector('#navigator');
-                navigator.resetToPage('upcomingraces.html');
-                loginId.innerHTML = userName.value;
-            } else {
-                loginMessages.innerHTML = 'Onjuist wachtwoord.'
-            }
-        } else {
-            loginMessages.innerHTML = 'Gebruikersnaam bestaat niet.'
-            return;
-        }
-    });
-
-})
+function myFunction() {
+    // const navigator = document.querySelector('#navigator');
+    // navigator.resetToPage('race1.html');
+    navigator.pushPage('race1.html', { data: { title: 'Austriaa' } });
+}
 
 function CreateNewUser(userName, password) {
     database.ref('/players/' + userName.toUpperCase()).set({
@@ -39,28 +15,32 @@ function CreateNewUser(userName, password) {
     });
 }
 
+function CreateNewToken(playerId) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var n = String(today.getMinutes()).padStart(2, '0');
+    var s = String(today.getSeconds()).padStart(2, '0');
 
-// (function() {
+    var token = playerId + ':' + GenerateToken(128, '123456789abcdefghijklmnopqrstuvwxyz') + yyyy + mm + dd + n + s;
+    var expirationDate = new Date(today.getFullYear(), 11, 31, 23, 59, 59, 0);
 
-//     // Initialize Firebase
-//     const firebaseConfig = {
-//         apiKey: "AIzaSyBO31TRNBwxFYa9boxMowe8CytZJxI05PQ",
-//         authDomain: "matemcof1poule.firebaseapp.com",
-//         databaseURL: "https://matemcof1poule.firebaseio.com",
-//         projectId: "matemcof1poule",
-//         storageBucket: "matemcof1poule.appspot.com",
-//         messagingSenderId: "359154718841",
-//         appId: "1:359154718841:web:26320c8554ca3317e6dca8"
-//     };
-//     firebase.initializeApp(firebaseConfig);
+    var messageListRef = firebase.database().ref('/tokens/');
+    var newMessageRef = messageListRef.push();
+    newMessageRef.set({
+        'player_id': playerId.toUpperCase(),
+        'token': token
+    });
 
-//     // Get elements
-//     const preObject = document.getElementById('object');
+    document.cookie = 'token=' + token + '=;expires=' + expirationDate.toGMTString(); // cookieDate(expirationDate);
+}
 
-//     // Create references
-//     const dbRefObject = firebase.database().ref().child('object');
-
-//     // Sync object changes
-//     dbRefObject.on('value', snap => console.log(snap.val()));
-
-// }());
+function GenerateToken(len, arr) {
+    var ans = '';
+    for (var i = len; i > 0; i--) {
+        ans +=
+            arr[Math.floor(Math.random() * arr.length)];
+    }
+    return ans;
+}

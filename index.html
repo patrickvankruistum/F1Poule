@@ -4,62 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/onsenui.css">
-    <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/onsen-css-components.min.css">
+    <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/dark-onsen-css-components.min.css">
     <script src="https://patrickvankruistum.github.io/F1Poule/lib/js/onsenui.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+    <script src="app.js"></script>
+    <script src='fbase.js'></script>
+    <script src='cookies.js'></script>
 </head>
 
 <body>
 
+    <!-- https://stackoverflow.com/questions/22144654/add-a-login-page-in-my-onsenui-app
+    Change initial page variable? -->
 
+    <ons-navigator swipeable id="navigator" page="main.html"></ons-navigator>
 
-    <ons-navigator id="navigator">
+    <ons-toolbar id="toolbar">
+        <div id="backButton" class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center" id="toolbarTitle">Matemco F1 2020</div>
 
-        <ons-toolbar>
+        <p class="right">
+            <ons-button icon="md-face" modifier="quiet" style="background-color: rgb(22, 22, 22); color:white">
 
-            <div class="center">Matemco F1 2020</div>
+                <!-- <ons-icon id="account" size="30px" class="center" icon="md-face" style="margin-right:20px" onclick=showPopover(this) tappable></ons-icon> -->
+            </ons-button>
+        </p>
 
-            <div id="wtf" class="right" style="margin-right:20px">
-                <!-- <ons-icon id="wtf" icon="md-face" style="margin-right:20px"></ons-icon> -->
-            </div>
+    </ons-toolbar>
 
+    <template id="main.html">
+        <ons-page id="main">
 
-        </ons-toolbar>
-
-        <ons-page>
-            <div style="text-align: center; margin-top: 200px">
-                <p>
-                    <ons-input id="userName" placeholder="Gebruikersnaam" modifier="underbar"></ons-input>
-                </p>
-
-                <p>
-                    <ons-input id="password" placeholder="Wachtwoord" type="password" modifier="underbar">
-                    </ons-input>
-                </p>
-
-                <p>
-                    <ons-button id="signIn">Aanmelden</ons-button>
-                </p>
-                <p>
-                    <div id="loginMessages"></div>
-                </p>
-            </div>
-
-        </ons-page>
-    </ons-navigator>
-
-    <template id="upcomingraces.html">
-        <ons-page id="home">
-            <!-- <ons-toolbar id="test">
-                <div class="center">Matemco F1 Poule 2020</div>
-                <div id="wtf" class="right" style="margin-right:20px">null</div>
-            </ons-toolbar> -->
             <ons-list style="margin-top:60px"> 
                 <ons-list-header>Upcoming races</ons-list-header>
-                <ons-list-item tappable>Austria</ons-list-item>
+                <ons-list-item tappable onclick=myFunction()>Austria</ons-list-item>
                 <ons-list-item tappable>Austria</ons-list-item>
                 <ons-list-item tappable>Hungary</ons-list-item>
                 <ons-list-item tappable>Silverstone</ons-list-item>
@@ -72,57 +56,58 @@
         </ons-page>
       </template>
 
+    <template id="race1.html">
+        <ons-page id="race1">
+        </ons-page>
+      </template>
 
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBO31TRNBwxFYa9boxMowe8CytZJxI05PQ",
-            authDomain: "matemcof1poule.firebaseapp.com",
-            databaseURL: "https://matemcof1poule.firebaseio.com",
-            projectId: "matemcof1poule",
-            storageBucket: "matemcof1poule.appspot.com",
-            messagingSenderId: "359154718841",
-            appId: "1:359154718841:web:26320c8554ca3317e6dca8"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
+    <template id="login.html">
+        <ons-page id="login">
+            <div style="text-align: center; margin-top: 200px">
+                <p>
+                    <ons-input id="loginUserName" placeholder="Gebruikersnaam" modifier="underbar"></ons-input>
+                </p>
 
-    <script src="app.js"></script>
+                <p>
+                    <ons-input id="loginPassword" placeholder="Wachtwoord" type="password" modifier="underbar">
+                    </ons-input>
+                </p>
 
-
-    <!-- <ons-page>
-        <ons-toolbar>
-            <div class="left">
-                <ons-back-button>Back</ons-back-button>
+                <p>              
+                    <ons-button id="loginSignIn">Aanmelden</ons-button>
+                </p>
+                <p>
+                    <ons-checkbox id="loginRememberMe" checked>Remember me</ons-checkbox>
+                </p>
+                <p>
+                    <div id="loginMessages"></div>
+                </p>
             </div>
-            <div class="center">Matemco F1 Poule 2020</div>
-        </ons-toolbar>
+        </ons-page>
+    </template>
 
-        <ons-tabbar swipeable position="auto">
-            <ons-tab page="tab1.html" label="Upcoming races" badge="8" active></ons-tab>
-            <ons-tab page="tab2.html" label="Past races" badge="0">
-            </ons-tab>
-        </ons-tabbar>
-
-
-        <br />
-        <template id="tab1.html">
+    <ons-popover direction="down" id="popover">
+        <div style="padding: 10px; text-align: center;">
             <ons-list>
-                <ons-list-item tappable>Austria</ons-list-item>
-                <ons-list-item tappable>Austria</ons-list-item>
-                <ons-list-item tappable>Hungary</ons-list-item>
-                <ons-list-item tappable>Silverstone</ons-list-item>
-                <ons-list-item tappable>Silverstone</ons-list-item>
-                <ons-list-item tappable>Spain</ons-list-item>
-                <ons-list-item tappable>Belgium</ons-list-item>
-                <ons-list-item tappable>Italy</ons-list-item>
-                <ons-list-header>Past races</ons-list-header>
+                <ons-list-header id="loginId">null</ons-list-header>
+                <ons-list-item onclick=hidePopover() tappable>Afmelden</ons-list-item>
+                <ons-list-item onclick=hidePopover() tappable>Menu sluiten</ons-list-item>
             </ons-list>
-        </template>
-        <template id="tab2.html">
+        </div>
+    </ons-popover>
+
+    <!-- <ons-template id="popover.html">
+        <ons-popover direction="down" id="popover" cancelable>
             <ons-list>
+                <ons-list-item modifier="tappable ">Option 1</ons-list-item>
+                <ons-list-item modifier="tappable ">Option 2</ons-list-item>
             </ons-list>
-        </template>
-    </ons-page> -->
+        </ons-popover>
+    </ons-template> -->
+
+    <script src="def.js "></script>
+    <script src="login.js "></script>
+    <script src='test.js'></script>
 
 </body>
 

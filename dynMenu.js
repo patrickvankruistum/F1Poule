@@ -34,7 +34,7 @@ var ConstructAnotherMenu;
 
 function ConstructDriverMenu(drivers) {
     let menuHTML = '<ons-list>';
-    menuHTML += '<ons-list-header class="driverSelectMenuHeader" id="driverSelect" style="position: fixed" >Selecteer</ons-list-header>';
+    menuHTML += '<ons-list-header class="driverSelectMenuHeader" id="driverSelect">Selecteer</ons-list-header>';
     menuHTML += drivers;
 
     menuHTML += '</ons-list>';

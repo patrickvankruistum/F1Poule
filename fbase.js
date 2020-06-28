@@ -134,6 +134,8 @@ function DriverSelected(sender) {
     let code = String(targetElement.id.replace('driver', ''));
     let driver = sender.dataset.initials;
 
+    // console.log(targetElement.dataset.driver);
+
 
     if (code === '' || driver === '' || currentUsr === '') return;
 

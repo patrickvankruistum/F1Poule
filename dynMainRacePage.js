@@ -130,7 +130,7 @@ function ConstructDriverBar(elementId, firstName, lastName, team, country, color
     let text = '';
 
     text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(lastName).toLowerCase() + '.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
-    text += '<div class="driverColorContainer" style="background-color: red">|</div>'; // DRIVER COLOR
+    text += '<div class="driverColorContainer" style="color:' + color + '">|</div>'; // DRIVER COLOR
     text += '<div class="driverInfo">'; // DRIVER INFO
     text += '<div class="driverInfoUp">' + firstName + ' ' + lastName + '</div>'; // DRIVER INFO NAME
     text += '<div class="driverInfoDown">' + team + '</div>'; // DRIVER INFO TEAM

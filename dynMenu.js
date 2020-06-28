@@ -84,7 +84,9 @@ function hidePopoverAddUser() {
 }
 
 function showDriverSelect(target) {
-    document.getElementById('popoverDriverSelect').show(target);
+    let element = document.getElementById('popoverDriverSelect');
+    element.setAttribute('data-sender', target.id);
+    element.show(target);
 }
 
 function hideDriverSelect() {

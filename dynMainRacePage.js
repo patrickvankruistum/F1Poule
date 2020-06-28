@@ -98,42 +98,61 @@ function ConstructTheBar(no, empty) {
     text += '<div class="points">' + GetPointValue(no); // POINTS
     text += '</div>'; // END POINTS
     text += '</div>'; // END CONTAINER FOR NUMBER AND SCORE
-    if (!empty) text += ConstructDriverBar();
-    else text += ConstructEmptyDriverBar();
+    if (!empty) text += ConstructEmptyDriverBar(no);
+    else text += ConstructEmptyDriverBar(no);
     text += '</div>'; // COMPLETE BAR
     return text;
 }
 
-function ConstructEmptyDriverBar() {
+function ConstructEmptyDriverBar(no) {
+    console.log(no);
     let text = '';
-    text += '<div class="driverBarEmpty">selecteer een coureur'; // DRIVER BAR
+    text += '<div id="driverBar' + no + '" class="driverBarEmpty">selecteer een coureur'; // DRIVER BAR
     text += '</div>'; // DRIVER BAR
     return text;
 }
 
-function ConstructDriverBar() {
+function ConstructDriverBar(elementId, firstName, lastName, team, country, color) {
+    let c = String(country).toLowerCase().replace('ë', 'e');
+    console.log('ELLO PUPPET', elementId);
+
+    let newId = elementId.replace('driver', 'driverBar');
+
+    let element = document.getElementById(newId);
+    console.log(color);
     let text = '';
-    text += '<div class="driverBar">'; // DRIVER BAR
-    text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/verstappen.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
-    text += '<div class="driverColorContainer">|</div>'; // DRIVER COLOR
+    // text += '<div class="driverBar">'; // DRIVER BAR
+    text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(lastName).toLowerCase() + '.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
+    text += '<div class="driverColorContainer" style="color: ' + color + '">|</div>'; // DRIVER COLOR
     text += '<div class="driverInfo">'; // DRIVER INFO
-    text += '<div class="driverInfoUp">Max VERSTAPPEN</div>'; // DRIVER INFO NAME
-    text += '<div class="driverInfoDown">RED BULL RACING</div>'; // DRIVER INFO TEAM
+    text += '<div class="driverInfoUp">' + firstName + ' ' + lastName + '</div>'; // DRIVER INFO NAME
+    text += '<div class="driverInfoDown">' + team + '</div>'; // DRIVER INFO TEAM
     text += '</div>'; // DRIVER INFO
-    text += '<div class="driverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/nederland.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
-    text += '</div>'; // DRIVER BAR
+    text += '<div class="driverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + c + '.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
+    // text += '</div>'; // DRIVER BAR
 
-    return text;
+    element.innerHTML = text;
 }
+
+// function ConstructDriverBar() {
+//     let text = '';
+//     text += '<div class="driverBar">'; // DRIVER BAR
+//     text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/verstappen.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
+//     text += '<div class="driverColorContainer">|</div>'; // DRIVER COLOR
+//     text += '<div class="driverInfo">'; // DRIVER INFO
+//     text += '<div class="driverInfoUp">Max VERSTAPPEN</div>'; // DRIVER INFO NAME
+//     text += '<div class="driverInfoDown">RED BULL RACING</div>'; // DRIVER INFO TEAM
+//     text += '</div>'; // DRIVER INFO
+//     text += '<div class="driverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/nederland.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
+//     text += '</div>'; // DRIVER BAR
+
+//     return text;
+// }
 
 function DriverSelection(sender) {
     // let element = document.getElementById(sender.id);
     // let attribute = element.getAttribute('points');
     // element.innerHTML = ConstructTheBar(attribute, false);
     showDriverSelect(sender);
-
-}
-
-function DriverSelected() {
 
 }

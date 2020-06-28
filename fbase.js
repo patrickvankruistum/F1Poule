@@ -82,15 +82,57 @@ function GetDrivers() {
     database.ref('drivers').orderByChild('sorting').on("value", function(snapshot) {
         snapshot.forEach(function(data) {
             if (data.key != null) {
-                console.log(snapshot.child(data.key).val().lastname);
-                let lastname = snapshot.child(data.key).val().lastname;
-                text += '<ons-list-item class="menuItem" onclick=DriverSelected(this) tappable><div><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + lastname.toLowerCase() + '_helmet.png" style="max-width: 35px"/></div>' + '<div>' + data.key + '</div></ons-list-item>';
+
+                // let teamRef = 
+                // ref.once("value", snapshot => {
+                //     if (snapshot.exists()) {
+                //         const raceData = snapshot.val();
+                //         page.innerHTML = ConstructRacePage(raceData);
+                //         SetTitle(raceData.Land);
+                //     }
+
+                //     ons.ready(function() {
+                //         navigator.pushPage('mainRace.html');
+                //         ToggleBackButton(true);
+                //     });
+
+                // });
+                let driver = snapshot.child(data.key).val();
+
+                let teamRef = database.ref('/teams/' + driver.team);
+                let teamName;
+                let teamColor;
+                teamRef.once("value", function(snapshot) {
+                    if (snapshot.exists()) {
+                        const teamData = snapshot.val();
+
+                        teamName = teamData.name;
+                        teamColor = teamData.color;
+                    }
+                    console.log(teamColor);
+                    text += '<ons-list-item data-initials="' + data.key + '" data-firstname="' + driver.firstname + '" data-lastname="' + driver.lastname + '" data-team="' + teamName + '" data-country="' + driver.country + '" data-color="' + teamColor + '" class="menuItem" onclick=DriverSelected(this) tappable>'
+                    text += '<div class="left"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.number + '.png" style="max-width: 35px"/></div>'
+                    text += '<div class="center">' + data.key + '</div>';
+                    text += '<div class="right"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.lastname.toLowerCase() + '_helmet.png" style="max-width: 35px"/></div>'
+                    text += '</ons-list-item>';
+                    ConstructDriverMenu(text);
+                });
+
+
             }
         });
-        ConstructDriverMenu(text);
+
     });
 
 
+}
+
+function DriverSelected(sender) {
+
+    let element = document.getElementById("popoverDriverSelect");
+    let targetElement = document.getElementById(element.dataset.sender);
+    ConstructDriverBar(targetElement.id, sender.dataset.firstname, sender.dataset.lastname, sender.dataset.team, sender.dataset.country, sender.dataset.color);
+    hideDriverSelect();
 }
 
 function AddTimeDateOfFp1() {

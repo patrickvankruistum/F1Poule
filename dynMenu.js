@@ -34,28 +34,13 @@ var ConstructAnotherMenu;
 
 function ConstructDriverMenu(drivers) {
     let menuHTML = '<ons-list>';
-    menuHTML += '<ons-list-header class="menuItem" id="driverSelect">Selecteer</ons-list-header>';
+    menuHTML += '<ons-list-header class="driverSelectMenuHeader" id="driverSelect" style="position: fixed" >Selecteer</ons-list-header>';
     menuHTML += drivers;
 
     menuHTML += '</ons-list>';
 
     document.getElementById('divPopoverAddDriver').innerHTML = menuHTML;
 }
-
-// var ConstructDriverMenu;
-// (ConstructDriverMenu = function() {
-
-//     let menuHTML = '<ons-list>';
-//     menuHTML += '<ons-list-header class="menuItem" id="driverSelect">Selecteer mofo</ons-list-header>';
-//     menuHTML += '<ons-list-item class="menuItem" onclick=hideDriverSelect() tappable style="color: red">Annuleren</ons-list-item>';
-//     menuHTML += '<ons-list-item class="menuItem" onclick=hideDriverSelect() tappable>HAM</ons-list-item>';
-//     menuHTML += GetDrivers();
-
-//     menuHTML += '</ons-list>';
-//     console.log(menuHTML);
-
-//     document.getElementById('divPopoverAddDriver').innerHTML = menuHTML;
-// })();
 
 function showPopover(target) {
     if (currentUsr == '') return;

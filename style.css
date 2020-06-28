@@ -266,5 +266,63 @@
 
 #divPopoverAddDriver {
     max-height: 350px;
+    width: 300px;
     overflow-y: auto;
 }
+
+.driverSelectMainContainer {
+    /* border: 1px solid green; */
+    width: 100vp;
+    height: 50px;
+}
+
+.driverSelectNumber {
+    float: left;
+    height: 100%;
+    /* border: 1px solid green; */
+    width: 20px;
+    margin-top: 20px;
+}
+
+.driverSelectHelmet {
+    float: left;
+    height: 100%;
+    /* border: 1px solid green; */
+    width: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.driverSelectColor {
+    font-family: 'F1Bold';
+    float: left;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.driverSelectInitials {
+    /* font-family: 'F1Bold'; */
+    float: right;
+    height: 100%;
+    /* border: 1px solid green; */
+    width: 70px;
+    /* text-align: center; */
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+.driverSelectMenuHeader {
+    font-family: 'F1Regular';
+    font-size: 12px;
+    width: 220px;
+    z-index: 99;
+    margin-top: 0px;
+    padding-top: 5px;
+}
+
+
+/* 
+style="position: fixed; ; width:220px; margin-bottom:50px" */

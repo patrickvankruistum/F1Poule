@@ -5,7 +5,7 @@ function eraseDatabaseToken() {
     if (c == null) return;
 
     var r = database.ref('tokens');
-    database.ref('tokens').orderByChild('token').equalTo(c).on("value", function(snapshot) {
+    database.ref('tokens').orderByChild('token').equalTo(c).once("value", function(snapshot) {
         snapshot.forEach(function(data) {
             if (data.key != null) {
                 r.child(data.key).remove();
@@ -17,7 +17,7 @@ function eraseDatabaseToken() {
 
 function RemoveOldTokensFromDatabase() {
     var r = database.ref('tokens');
-    database.ref('tokens').on("value", function(snapshot) {
+    database.ref('tokens').once("value", function(snapshot) {
         snapshot.forEach(function(data) {
             var date = Date.parse(snapshot.child(data.key).val().expirationDate);
             if (date < new Date()) {
@@ -51,15 +51,31 @@ function GetRacePage(sender) {
 
     ref.once("value", snapshot => {
         if (snapshot.exists()) {
-            const raceData = snapshot.val();
-            page.innerHTML = ConstructRacePage(raceData);
-            SetTitle(raceData.Land);
-        }
 
-        ons.ready(function() {
-            navigator.pushPage('mainRace.html');
-            ToggleBackButton(true);
-        });
+            const raceData = snapshot.val();
+
+            let ref2 = database.ref('/predictions/' + record + '/' + currentUsr);
+            ref2.once("value", snapshot2 => {
+
+                let arr;
+
+                if (snapshot2.exists()) {
+                    arr = snapshot2.val();
+                    arr = Object.entries(arr);
+                }
+
+                page.innerHTML = ConstructRacePage(raceData, snapshot.key, arr);
+
+                SetTitle(raceData.Land);
+
+                ons.ready(function() {
+                    navigator.pushPage('mainRace.html');
+                    ToggleBackButton(true);
+                });
+
+            });
+
+        }
 
     });
 
@@ -77,35 +93,34 @@ function CreateNewUser(userName, firstName, password) {
 
 function GetDrivers() {
 
-    let text = ''
-        // let ref = database.ref('/drivers/');
-    database.ref('drivers').orderByChild('sorting').on("value", function(snapshot) {
+    let text = '';
+    database.ref('drivers').orderByChild('sorting').once("value", function(snapshot) {
         snapshot.forEach(function(data) {
             if (data.key != null) {
                 let driver = snapshot.child(data.key).val();
 
-                let teamRef = database.ref('/teams/' + driver.team);
-                let teamName;
-                let teamColor;
-                teamRef.once("value", function(snapshot) {
-                    if (snapshot.exists()) {
-                        const teamData = snapshot.val();
+                text += '<ons-list-item id="driverItemList' + data.key + '" data-initials="' + data.key + '" data-firstname="' + driver.firstname + '" data-lastname="' + driver.lastname + '" data-team="' + driver.teamname + '" data-country="' + driver.country + '" data-color="' + driver.teamcolor + '" class="menuItem" onclick=DriverSelected(this) tappable>'
+                text += '<div class="driverSelectMainContainer">';
+                text += '<div class="driverSelectNumber"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.number + '.png" style="max-width: 35px"/></div>'
+                text += '<div class="driverSelectHelmet"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(driver.lastname).toLowerCase() + '_helmet.png" style="max-width: 35px"/></div>'
+                text += '<div class="driverSelectColor" style="color:' + driver.teamcolor + '">' + '|' + '</div>';
 
-                        teamName = teamData.name;
-                        teamColor = teamData.color;
-                    }
+                text += '<div id="driverInitials" data-initials="' + String(data.key).toUpperCase() + '" class="driverSelectInitials">' + String(driver.lastname).toUpperCase() + '</div>';
 
-                    text += '<ons-list-item data-initials="' + data.key + '" data-firstname="' + driver.firstname + '" data-lastname="' + driver.lastname + '" data-team="' + teamName + '" data-country="' + driver.country + '" data-color="' + teamColor + '" class="menuItem" onclick=DriverSelected(this) tappable>'
-                    text += '<div class="left"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.number + '.png" style="max-width: 35px"/></div>'
-                    text += '<div class="center">' + data.key + '</div>';
-                    text += '<div class="right"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.lastname.toLowerCase() + '_helmet.png" style="max-width: 35px"/></div>'
-                    text += '</ons-list-item>';
-                    ConstructDriverMenu(text);
-                });
+                text += '</div>';
+                text += '</ons-list-item>';
+
 
 
             }
         });
+        ConstructDriverMenu(text);
+
+
+
+
+
+
 
     });
 
@@ -116,6 +131,15 @@ function DriverSelected(sender) {
 
     let element = document.getElementById("popoverDriverSelect");
     let targetElement = document.getElementById(element.dataset.sender);
+    let code = String(targetElement.id.replace('driver', ''));
+    let driver = sender.dataset.initials;
+
+
+    if (code === '' || driver === '' || currentUsr === '') return;
+
+    let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr);
+    ref.child(code).set(driver);
+
     ConstructDriverBar(targetElement.id, sender.dataset.firstname, sender.dataset.lastname, sender.dataset.team, sender.dataset.country, sender.dataset.color);
     hideDriverSelect();
 }

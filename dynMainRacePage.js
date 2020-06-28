@@ -1,22 +1,25 @@
-function ConstructRacePage(raceData) {
-    return '<ons-page id="race">' + ConstructRaceSpecificPage(raceData) + '</ons-page>'
+var currentRaceOpened = '';
+
+function ConstructRacePage(raceData, key, arr) {
+    if (key != '') currentRaceOpened = key;
+    return '<ons-page id="race">' + ConstructRaceSpecificPage(raceData, arr) + '</ons-page>'
 }
 
-function ConstructRaceSpecificPage(raceData) {
-    return ConstructMainRacePageList(raceData);
+function ConstructRaceSpecificPage(raceData, arr) {
+    return ConstructMainRacePageList(raceData, arr);
 }
 
-function ConstructMainRacePageList(raceData) {
+function ConstructMainRacePageList(raceData, arr) {
     let h = document.getElementById('toolbar').getBoundingClientRect().height;
 
     let text = '';
     text += '<ons-list id="mainList" style="margin-top:' + (h) + 'px">';
-    text += ConstructMainRacePageListVoorspelling(raceData);
+    text += ConstructMainRacePageListVoorspelling(raceData, arr);
     text += '</ons-list>'
     return text;
 }
 
-function ConstructMainRacePageListVoorspelling(raceData) {
+function ConstructMainRacePageListVoorspelling(raceData, arr) {
     let fp1Date = new Date(raceData.FP1);
     delta = fp1Date - new Date();
     let timeLeft = new TimeLeft(fp1Date);
@@ -31,30 +34,30 @@ function ConstructMainRacePageListVoorspelling(raceData) {
     text += '</div>';
 
     text += '<ons-list-header><div>Pole Position</div></ons-list-header>';
-    text += ConstructMainRacePageListItem('PP', false);
+    text += ConstructMainRacePageListItem('PP', arr);
 
     text += '<ons-list-header><div>Snelste Race Ronde</div></ons-list-header>';
-    text += ConstructMainRacePageListItem('FL', true);
+    text += ConstructMainRacePageListItem('FL', arr);
     text += '<ons-list-header><div>Uitslag race</div></ons-list-header>';
 
     var i;
     for (i = 1; i <= 10; i++) {
-        text += ConstructMainRacePageListItem(i.toString(), true);
+        text += ConstructMainRacePageListItem(i.toString(), arr);
     }
 
     return text;
 }
 
-function ConstructMainRacePageListItem(no, empty) {
+function ConstructMainRacePageListItem(no, arr) {
     let text = '';
     text += '<ons-list-item id="driver' + no + '" points="' + no + '" class="selectDriverButton" tappable onclick="DriverSelection(this)">';
-    text += ConstructTheBar(no, empty);
+    text += ConstructTheBar(no, arr);
     text += '</ons-list-item>';
 
     return text;
 }
 
-function ConstructTheBar(no, empty) {
+function ConstructTheBar(no, arr) {
     let text = '';
     text += '<div class="completeBar">'; // COMPLETE BAR
     text += '<div class="bigNumberPointContainer">'
@@ -63,8 +66,23 @@ function ConstructTheBar(no, empty) {
     text += '<div class="points">' + GetPointValue(no); // POINTS
     text += '</div>'; // END POINTS
     text += '</div>'; // END CONTAINER FOR NUMBER AND SCORE
-    if (!empty) text += ConstructEmptyDriverBar(no);
-    else text += ConstructEmptyDriverBar(no);
+
+    if (arr != null) {
+        var found = arr.find(function(element) {
+            return element[0] === no;
+        });
+
+        if (found != null) {
+            text += ConstructDriverBarInsteadOfNewBar(found[0], found[1]);
+        } else {
+            text += ConstructEmptyDriverBar(no);
+        }
+    } else {
+        text += ConstructEmptyDriverBar(no);
+    }
+
+
+
     text += '</div>'; // COMPLETE BAR
     return text;
 }
@@ -74,6 +92,32 @@ function ConstructEmptyDriverBar(no) {
     text += '<div id="driverBar' + no + '" class="driverBarEmpty">selecteer een coureur'; // DRIVER BAR
     text += '</div>'; // DRIVER BAR
     return text;
+}
+
+function ConstructDriverBarInsteadOfNewBar(no, driver) {
+    let sender = document.getElementById('driverItemList' + driver);
+
+    let firstName = sender.dataset.firstname;
+    let lastName = sender.dataset.lastname;
+    let team = sender.dataset.team;
+    let country = sender.dataset.country;
+    let c = String(country).toLowerCase().replace('ë', 'e');
+    let color = sender.dataset.color
+
+    let text = '';
+    text += '<div id="driverBar' + no + '" class="driverBar">'; // DRIVER BAR
+
+    text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(lastName).toLowerCase() + '.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
+    text += '<div class="driverColorContainer" style="color:' + color + '">|</div>'; // DRIVER COLOR
+    text += '<div class="driverInfo">'; // DRIVER INFO
+    text += '<div class="driverInfoUp">' + firstName + ' ' + lastName + '</div>'; // DRIVER INFO NAME
+    text += '<div class="driverInfoDown">' + team + '</div>'; // DRIVER INFO TEAM
+    text += '</div>'; // DRIVER INFO
+    text += '<div class="driverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + c + '.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
+
+    text += '</div>'; // DRIVER BAR
+    return text;
+
 }
 
 function ConstructDriverBar(elementId, firstName, lastName, team, country, color) {
@@ -86,7 +130,7 @@ function ConstructDriverBar(elementId, firstName, lastName, team, country, color
     let text = '';
 
     text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(lastName).toLowerCase() + '.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
-    text += '<div class="driverColorContainer" style="color:' + color + '">|</div>'; // DRIVER COLOR
+    text += '<div class="driverColorContainer" style="background-color: red">|</div>'; // DRIVER COLOR
     text += '<div class="driverInfo">'; // DRIVER INFO
     text += '<div class="driverInfoUp">' + firstName + ' ' + lastName + '</div>'; // DRIVER INFO NAME
     text += '<div class="driverInfoDown">' + team + '</div>'; // DRIVER INFO TEAM

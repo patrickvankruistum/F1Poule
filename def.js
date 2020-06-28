@@ -83,16 +83,16 @@ var puntenSysteem = [{
     'points': 8,
 }, {
     'id': '7',
-    'points': 6,
+    'points': 12,
 }, {
     'id': '8',
-    'points': 4,
+    'points': 15,
 }, {
     'id': '9',
-    'points': 2,
+    'points': 18,
 }, {
     'id': '10',
-    'points': 1,
+    'points': 25,
 }]
 
 function GetPointValue(result) {

@@ -82,21 +82,6 @@ function GetDrivers() {
     database.ref('drivers').orderByChild('sorting').on("value", function(snapshot) {
         snapshot.forEach(function(data) {
             if (data.key != null) {
-
-                // let teamRef = 
-                // ref.once("value", snapshot => {
-                //     if (snapshot.exists()) {
-                //         const raceData = snapshot.val();
-                //         page.innerHTML = ConstructRacePage(raceData);
-                //         SetTitle(raceData.Land);
-                //     }
-
-                //     ons.ready(function() {
-                //         navigator.pushPage('mainRace.html');
-                //         ToggleBackButton(true);
-                //     });
-
-                // });
                 let driver = snapshot.child(data.key).val();
 
                 let teamRef = database.ref('/teams/' + driver.team);
@@ -109,7 +94,7 @@ function GetDrivers() {
                         teamName = teamData.name;
                         teamColor = teamData.color;
                     }
-                    console.log(teamColor);
+
                     text += '<ons-list-item data-initials="' + data.key + '" data-firstname="' + driver.firstname + '" data-lastname="' + driver.lastname + '" data-team="' + teamName + '" data-country="' + driver.country + '" data-color="' + teamColor + '" class="menuItem" onclick=DriverSelected(this) tappable>'
                     text += '<div class="left"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.number + '.png" style="max-width: 35px"/></div>'
                     text += '<div class="center">' + data.key + '</div>';
@@ -135,28 +120,28 @@ function DriverSelected(sender) {
     hideDriverSelect();
 }
 
-function AddTimeDateOfFp1() {
+// function AddTimeDateOfFp1() {
 
-    return;
+//     return;
 
-    let race = '01';
-    let day = 3;
-    let month = 7;
-    let year = 2020;
-    let hour = 11;
-    let minute = 00;
+//     let race = '01';
+//     let day = 3;
+//     let month = 7;
+//     let year = 2020;
+//     let hour = 11;
+//     let minute = 00;
 
-    let d = new Date(year, month - 1, day, hour, minute, 0, 0);
+//     let d = new Date(year, month - 1, day, hour, minute, 0, 0);
 
-    let ref = database.ref('/races/' + race);
-
-
-    //let newMessageRef = ref.push();
-    ref.update({
-        'FP1': d.toGMTString()
-    });
+//     let ref = database.ref('/races/' + race);
 
 
+//     //let newMessageRef = ref.push();
+//     ref.update({
+//         'FP1': d.toGMTString()
+//     });
 
 
-}
+
+
+// }

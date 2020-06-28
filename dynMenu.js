@@ -38,7 +38,6 @@ function ConstructDriverMenu(drivers) {
     menuHTML += drivers;
 
     menuHTML += '</ons-list>';
-    console.log(menuHTML);
 
     document.getElementById('divPopoverAddDriver').innerHTML = menuHTML;
 }

@@ -53,12 +53,7 @@ function SetTitle(text) {
     element.innerHTML = text;
 }
 
-function OnEvent() {
-    console.log('fuck my life');
-}
-
 document.addEventListener("show", function(event) {
-    console.log('this: ' + event.target.id);
     if (event.target.id == 'myPage') {
         // Clear your scope variables here or whatever                 
     }
@@ -82,12 +77,12 @@ document.addEventListener('init', function(event) {
 
 function getCountDownElement() {
     let element = document.getElementById('countDown');
-    element.innerHTML = 'FUCK ME';
+    //element.innerHTML = 'NOT GOOD';
 }
 
 function setCountDownElement() {
     let element = document.getElementById('countDown');
-    element.innerHTML = 'FUCK ME';
+    //element.innerHTML = 'NOT GOOD';
 };
 
 // function testerino() {

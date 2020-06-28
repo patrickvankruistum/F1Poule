@@ -48,13 +48,10 @@ function TimeLeftDelta(delta) {
 
 function UpdateTimeLeft() {
     let timeLeft = new TimeLeftDelta(delta);
-    console.log('fire', timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds);
     document.getElementById('countDownSeconds').innerHTML = timeLeft.seconds;
-    console.log(document.getElementById('countDownSeconds').innerHTML);
 }
 
 function StopTimer() {
-    console.log('attempting to stop timer');
     clearInterval(intervalId);
     intervalId = null;
 }

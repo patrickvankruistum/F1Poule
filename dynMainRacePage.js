@@ -114,22 +114,21 @@ function ConstructEmptyDriverBar(no) {
 
 function ConstructDriverBar(elementId, firstName, lastName, team, country, color) {
     let c = String(country).toLowerCase().replace('ë', 'e');
-    console.log('ELLO PUPPET', elementId);
-
     let newId = elementId.replace('driver', 'driverBar');
 
     let element = document.getElementById(newId);
-    console.log(color);
+    element.setAttribute('class', 'driverBar');
+
     let text = '';
-    // text += '<div class="driverBar">'; // DRIVER BAR
+
     text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(lastName).toLowerCase() + '.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
-    text += '<div class="driverColorContainer" style="color: ' + color + '">|</div>'; // DRIVER COLOR
+    text += '<div class="driverColorContainer" style="color:' + color + '">|</div>'; // DRIVER COLOR
     text += '<div class="driverInfo">'; // DRIVER INFO
     text += '<div class="driverInfoUp">' + firstName + ' ' + lastName + '</div>'; // DRIVER INFO NAME
     text += '<div class="driverInfoDown">' + team + '</div>'; // DRIVER INFO TEAM
     text += '</div>'; // DRIVER INFO
     text += '<div class="driverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + c + '.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
-    // text += '</div>'; // DRIVER BAR
+
 
     element.innerHTML = text;
 }

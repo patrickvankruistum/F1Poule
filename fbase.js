@@ -1,18 +1,3 @@
-(function() {
-
-    // Initialize Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyBO31TRNBwxFYa9boxMowe8CytZJxI05PQ",
-        authDomain: "matemcof1poule.firebaseapp.com",
-        databaseURL: "https://matemcof1poule.firebaseio.com",
-        projectId: "matemcof1poule",
-        storageBucket: "matemcof1poule.appspot.com",
-        messagingSenderId: "359154718841",
-        appId: "1:359154718841:web:26320c8554ca3317e6dca8"
-    };
-    firebase.initializeApp(firebaseConfig);
-}());
-
 const database = firebase.database();
 
 function eraseDatabaseToken() {
@@ -43,6 +28,7 @@ function RemoveOldTokensFromDatabase() {
 }
 
 function ReadCircuits() {
+    console.log('fire readcircuits');
     let nav = document.getElementById('races.html');
     let r = database.ref('races');
     let circuits = '';
@@ -53,25 +39,31 @@ function ReadCircuits() {
         nav.innerHTML = ConstructMainPage(circuits);
 
         navigator.pushPage('main.html');
+
     });
 }
+
 
 function GetRacePage(sender) {
     let page = document.getElementById('race.html');
     let record = sender.getAttribute('record');
-
     let ref = database.ref('/races/' + record);
+
     ref.once("value", snapshot => {
         if (snapshot.exists()) {
             const raceData = snapshot.val();
             page.innerHTML = ConstructRacePage(raceData);
+            SetTitle(raceData.Land);
         }
-        navigator.pushPage('mainRace.html');
-        ToggleBackButton(true);
+
+        ons.ready(function() {
+            navigator.pushPage('mainRace.html');
+            ToggleBackButton(true);
+        });
+
     });
+
 }
-
-
 
 function CreateNewUser(userName, firstName, password) {
 
@@ -81,4 +73,30 @@ function CreateNewUser(userName, firstName, password) {
         firstname: firstName,
         password: password
     });
+}
+
+function AddTimeDateOfFp1() {
+
+    return;
+
+    let race = '01';
+    let day = 3;
+    let month = 7;
+    let year = 2020;
+    let hour = 11;
+    let minute = 00;
+
+    let d = new Date(year, month - 1, day, hour, minute, 0, 0);
+
+    let ref = database.ref('/races/' + race);
+
+
+    //let newMessageRef = ref.push();
+    ref.update({
+        'FP1': d.toGMTString()
+    });
+
+
+
+
 }

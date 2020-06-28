@@ -47,3 +47,89 @@ function ToggleBusyIndicator(visible) {
     if (visible) element.setAttribute('style', 'visibility: visible');
     else element.setAttribute('style', 'visibility: hidden');
 }
+
+function SetTitle(text) {
+    let element = document.getElementById('toolbarTitle');
+    element.innerHTML = text;
+}
+
+function OnEvent() {
+    console.log('fuck my life');
+}
+
+document.addEventListener("show", function(event) {
+    console.log('this: ' + event.target.id);
+    if (event.target.id == 'myPage') {
+        // Clear your scope variables here or whatever                 
+    }
+});
+
+document.addEventListener('init', function(event) {
+
+
+    ons.ready(function() {
+        var page = event.target;
+
+        if (page.id === 'mainRacePage') {
+
+        } else if (page.id === 'raceUitslag') {
+            // testerino();
+        }
+
+    });
+
+});
+
+function getCountDownElement() {
+    let element = document.getElementById('countDown');
+    element.innerHTML = 'FUCK ME';
+}
+
+function setCountDownElement() {
+    let element = document.getElementById('countDown');
+    element.innerHTML = 'FUCK ME';
+};
+
+// function testerino() {
+//     console.log('try to start timer');
+//     clearInterval(intervalId);
+
+//     if (intervalId != undefined) {
+//         console.log('shit already exists');
+//         return;
+//     }
+
+//     // var timeleft = 10;
+//     intervalId = setInterval(function() {
+//         if (delta <= 0) {
+//             clearInterval(intervalId);
+//         } else {
+//             UpdateTimeLeft();
+//         }
+//         delta -= 1;
+//     }, 60000);
+// }
+
+// function testerino() {
+//     console.log('try to start timer');
+//     clearInterval(intervalId);
+
+//     if (intervalId != undefined) {
+//         console.log('shit already exists');
+//         return;
+//     }
+
+//     // var timeleft = 10;
+//     intervalId = setInterval(function() {
+//         if (delta <= 0) {
+//             console.log('must clear');
+//             clearInterval(intervalId);
+//         } else {
+//             UpdateTimeLeft();
+//         }
+//         delta -= 1;
+//         console.log(delta);
+//     }, 1000);
+// }
+
+// document.querySelector('#navigator').popPage({ refresh: true });

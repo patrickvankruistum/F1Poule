@@ -8,43 +8,29 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/dark-onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/onsenui.css">
-    <link rel="stylesheet" href="https://patrickvankruistum.github.io/F1Poule/lib/css/dark-onsen-css-components.min.css"> -->
-    <!-- <script src="https://patrickvankruistum.github.io/F1Poule/lib/js/onsenui.min.js"></script> -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
-    <script src="app.js"></script>
-    <script src='fbase.js'></script>
-    <script src='cookies.js'></script>
-    <script src='dynMainPage.js'></script>
-    <script src='dynMainRacePage.js'></script>
 </head>
 
 <body id="body" style="background-color:black">
 
     <ons-navigator swipeable id="navigator"></ons-navigator>
-
-
     <ons-toolbar id="toolbar">
         <div id="backButton" class="left" style="visibility: hidden">
             <ons-back-button></ons-back-button>
         </div>
+
+
         <div class="center" id="toolbarTitle">Matemco F1 2020</div>
 
         <p class="right">
             <input id="menuButton" type="image" src="https://patrickvankruistum.github.io/F1Poule/lib/img/menuicon.png" width="30px" style="margin-right:15px; vertical-align:middle" />
-            </ons-button>
         </p>
 
         <ons-progress-bar id="progressBar" style="visibility: hidden" indeterminate></ons-progress-bar>
     </ons-toolbar>
 
-    <template id="races.html"></template>
-    <template id="race.html"></template>
-
     <template id="main.html">
-            <ons-page>
+            <ons-page id="main">
+                
                 <ons-tabbar position="bottom" swipeable position="auto">
                     <ons-tab id="racesTab" page="races.html" active="true">
                         <div class="tabName">RACES</div>
@@ -56,27 +42,15 @@
                         <div class="tabName">STAND F1</div>
                     </ons-tab>
                 </ons-tabbar>
+                
             </ons-page>
+            
         </template>
 
-    <template id="mainRace.html">
-            <ons-page id='mainRacePage'>
-                <ons-tabbar position="bottom" swipeable position="auto">
-                    <ons-tab id="voorspellingTab" page="race.html" active="true">
-                        <div class="tabName">VOORSPELLING</div>
-                    </ons-tab>
-                    <ons-tab page="race.html">
-                        <div class="tabName">INFO</div>
-                    </ons-tab>
-                    <ons-tab page="race.html">
-                        <div class="tabName">UITSLAG</div>
-                    </ons-tab>
-                </ons-tabbar>
-            </ons-page>
-        </template>
+    <template id="races.html"></template>
 
     <template id="standPoule.html">
-            <ons-page>
+            <ons-page id="standPoule">
                 <ons-list style="margin-top:43px">
                     <ons-list-header>
                         <div class="raceHeader">Stand Matemco Poule</div>
@@ -87,7 +61,7 @@
         </template>
 
     <template id="standF1.html">
-            <ons-page>
+            <ons-page id="standF1">
                 <ons-list style="margin-top:43px">
                     <ons-list-header>
                         <div class="raceHeader">Stand Formule 1</div>
@@ -96,12 +70,62 @@
             </ons-page>
         </template>
 
+    <template id="mainRace.html">
+        <ons-page id='mainRacePage'>
+            <ons-tabbar var="zeTab" position="bottom" swipeable position="auto">
+                <ons-tab id="voorspellingTab" page="race.html" active="true">
+                    <div class="tabName">VOORSPELLING</div>
+                </ons-tab>
+                <ons-tab page="raceInfo.html">
+                    <div class="tabName">INFO</div>
+                </ons-tab>
+                <ons-tab page="raceUitslag.html">
+                    <div class="tabName">UITSLAG</div>
+                </ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </template>
+
+    <template id="race.html" oninit="loadme()">
+        <!-- <ons-page id="racePagee">
+            <ons-list style="margin-top:43px">
+                <ons-list-header>
+                    <div class="raceHeader">Stand Formule 1</div>
+                </ons-list-header>
+            </ons-list>
+        </ons-page> -->
+    </template>
+
+    <template id="raceInfo.html">
+        <ons-page id="raceInfo"> 
+            <ons-list style="margin-top:43px">
+                <ons-list-header>
+                    <div class="raceHeader">Info</div>
+                </ons-list-header>
+            </ons-list>
+        </ons-page>
+    </template>
+
+    <template id="raceUitslag.html">
+        <ons-page id="raceUitslag">
+            <ons-list style="margin-top:43px">
+                <ons-list-header>
+                    <div class="raceHeader">Uitslag</div>
+                </ons-list-header>
+            </ons-list>
+        </ons-page>
+    </template>
+
+    <!-- <template id="race.html"></template> -->
+
+
+
 
     <template id="login.html">
             <ons-page id="login">
-                <div style="text-align: center; margin-top: 200px">
+                <div style="text-align: center; margin-top: 200px" >
                     <p>
-                        <ons-input id="loginUserName" placeholder="Gebruikersnaam" modifier="underbar"></ons-input>
+                        <ons-input id="loginUserName" placeholder="Gebruikersnaam" modifier="underbar" ></ons-input>
                     </p>
 
                     <p>
@@ -132,6 +156,28 @@
         </div>
     </ons-popover>
 
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBO31TRNBwxFYa9boxMowe8CytZJxI05PQ",
+            authDomain: "matemcof1poule.firebaseapp.com",
+            databaseURL: "https://matemcof1poule.firebaseio.com",
+            projectId: "matemcof1poule",
+            storageBucket: "matemcof1poule.appspot.com",
+            messagingSenderId: "359154718841",
+            appId: "1:359154718841:web:26320c8554ca3317e6dca8"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="app.js"></script>
+    <script src='fbase.js'></script>
+    <script src='cookies.js'></script>
+    <script src='dynMainPage.js'></script>
+    <script src='dynMainRacePage.js'></script>
 
     <script src="def.js "></script>
     <script src="login.js "></script>

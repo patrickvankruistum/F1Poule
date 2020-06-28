@@ -1,8 +1,9 @@
 var checkStart;
 (checkStart = function() {
 
+    GetPointValue('PP');
     ToggleBusyIndicator(true);
-    //hidePopover();
+
 
     var c = readCookie('token');
 
@@ -33,15 +34,6 @@ var checkStart;
     ToggleBusyIndicator(false);
 })();
 
-
-
-
-
-function GoToMainPage(userId) {
-    //loginId.innerHTML = userId;
-    ReadCircuits();
-}
-
 function OnSignIn() {
 
     currentUsr = document.getElementById('loginUserName').value.toUpperCase();
@@ -63,6 +55,7 @@ function OnSignIn() {
                     CreateNewToken(currentUsr);
                 }
 
+                refern();
                 document.getElementById('loginId').innerHTML = currentUsr;
                 GoToMainPage(currentUsr);
 
@@ -83,7 +76,15 @@ function SignOut() {
     currentUsr = '';
     hidePopover();
     GoToLoginPage();
+    location.reload();
 }
+
+function GoToMainPage(userId) {
+    SetTitle('Matemco F1 2020');
+    //loginId.innerHTML = userId;
+    ReadCircuits();
+}
+
 
 function GoToLoginPage() {
     //navigator.resetToPage('login.html');

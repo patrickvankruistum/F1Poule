@@ -1,5 +1,4 @@
-var ConstructMenu;
-(ConstructMenu = function() {
+var refern = (function thename() {
     let menuHTML = '<ons-list>';
     menuHTML += '<ons-list-header class="menuItem" id="loginId">null</ons-list-header>';
     menuHTML += '<ons-list-item class="menuItem" onclick=SignOut() tappable>Afmelden</ons-list-item>';
@@ -14,10 +13,12 @@ var ConstructMenu;
     document.getElementById('divPopover').innerHTML = menuHTML;
     document.getElementById('loginId').innerHTML = currentUsr;
     document.getElementById('menuButton').setAttribute('onclick', 'showPopover(this)');
-})();
 
-var ConstructMenu;
-(ConstructMenu = function() {
+    return thename;
+}());
+
+var ConstructAnotherMenu;
+(ConstructAnotherMenu = function() {
 
     let menuHTML = '<ons-list>';
     menuHTML += '<ons-list-header class="menuItem" id="loginId">Gebruiker toevoegen</ons-list-header>';
@@ -76,7 +77,9 @@ function OnAddUserSave() {
 backButton.addEventListener('click', function(event) {
     var id = navigator.topPage.id;
     if (id == 'mainRacePage') {
+        StopTimer();
         ToggleBackButton(false);
+        SetTitle('Matemco F1 2020');
         navigator.pushPage('main.html');
     }
 })

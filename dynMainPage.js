@@ -5,7 +5,7 @@ function CreateCircuitElement(data, key) {
     let maand = data.Maand.toString().toUpperCase();
     let text = '';
 
-    text += '<ons-list-item class="raceButton" record="' + key + '" tappable onclick=GetRacePage(this)>';
+    text += '<ons-list-item class="raceButton" record="' + key + '" tappable onclick=GetRacePage(this)>'; //onclick=GetRacePage(this)
     text += '<div class="raceAllInfo">';
     text += '<div class="raceFirstInfo">';
     text += '<div>' + dagen + '</div>';
@@ -39,8 +39,9 @@ function ConstructMainPageContent(circuits) {
 
 function ConstructMainPageList(circuits) {
     let h = document.getElementById('toolbar').getBoundingClientRect().height;
+
     let text = '';
-    text += '<ons-list id="mainList" style="margin-top:' + h + 'px">';
+    text += '<ons-list id="mainList" style="margin-top:' + (h) + 'px">';
     text += ConstructMainPageListUpcomingRaces(circuits);
     text += '</ons-list>'
     return text;

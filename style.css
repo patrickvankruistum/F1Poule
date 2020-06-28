@@ -314,6 +314,23 @@
     margin-right: 15px;
 }
 
+#driverSelectDescriptionContainer {
+    width: 200px;
+    overflow: hidden;
+}
+
+#driverSelectDescription {
+    float: left;
+    width: 51px;
+    position: inline;
+}
+
+#driverSelectVerwijder {
+    overflow: hidden;
+    margin-right: 10px;
+    float: right;
+}
+
 
 /* .driverSelectMenuHeader {
     font-family: 'F1Regular';

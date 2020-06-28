@@ -146,6 +146,36 @@ function DriverSelected(sender) {
     hideDriverSelect();
 }
 
+function deselectDriver() {
+    let element = document.getElementById('popoverDriverSelect');
+
+    let sender = element.dataset.sender;
+    // let realElement = document.getElementById(sender);
+    let code = sender.replace('driver', '');
+    var superElement = document.getElementById('driverBar' + code);
+    if (superElement.getAttribute('class') === 'driverBarEmpty') {
+        hideDriverSelect();
+        return;
+    }
+
+
+
+    if (code === '' || currentRaceOpened === '' || currentUsr === '') return;
+
+    let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr + '/');
+    ref.child(ref.child(code).key).remove();
+    //console.log(ref.child(code).key);
+    //ref.child(code).set(driver);
+
+
+    superElement.setAttribute('class', 'driverBarEmpty');
+    superElement.innerHTML = 'selecteer een coureur';
+
+    hideDriverSelect();
+
+    // realElement.innerHTML = ConstructTheBar(code, null);
+}
+
 // function AddTimeDateOfFp1() {
 
 //     return;

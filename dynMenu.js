@@ -77,9 +77,12 @@ function OnAddUserSave() {
 backButton.addEventListener('click', function(event) {
     var id = navigator.topPage.id;
     if (id == 'mainRacePage') {
+        document.querySelector('#navigator').popPage({ refresh: true });
         StopTimer();
         ToggleBackButton(false);
         SetTitle('Matemco F1 2020');
         navigator.pushPage('main.html');
+        // location.reload();
+
     }
 })

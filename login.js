@@ -4,7 +4,7 @@ var checkStart;
     GetPointValue('PP');
     ToggleBusyIndicator(true);
 
-
+    // document.querySelector('ons-back-button').options = { refresh: true };
     var c = readCookie('token');
 
     if (c == null) {

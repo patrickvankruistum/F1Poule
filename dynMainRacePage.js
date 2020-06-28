@@ -40,8 +40,8 @@ function ConstructMainRacePageListVoorspelling(raceData) {
 
 
     //console.log(asdf.getFullYear());
-    let text = ''
-        // text += '<ons-list-header>';
+    let text = '';
+    // text += '<ons-list-header>';
 
     // text += '<div class="raceDate">' + raceData.Dagen + ' ' + raceData.Maand + '</div>';
     // text += '<div class="raceWindowDescription">jouw voorspelling</div>';
@@ -82,7 +82,15 @@ function ConstructMainRacePageListVoorspelling(raceData) {
 
 function ConstructMainRacePageListItem(no, empty) {
     let text = '';
-    text += '<ons-list-item class="selectDriverButton" tappable>';
+    text += '<ons-list-item id="driver' + no + '" class="selectDriverButton" tappable onclick="DriverSelection(this)">';
+    text += ConstructTheBar(no, empty);
+    text += '</ons-list-item>';
+
+    return text;
+}
+
+function ConstructTheBar(no, empty) {
+    let text = '';
     text += '<div class="completeBar">'; // COMPLETE BAR
     text += '<div class="bigNumberPointContainer">'
     text += '<div class="bigNumber">' + no; // BIG NUMBER
@@ -93,8 +101,6 @@ function ConstructMainRacePageListItem(no, empty) {
     if (!empty) text += ConstructDriverBar();
     else text += ConstructEmptyDriverBar();
     text += '</div>'; // COMPLETE BAR
-    text += '</ons-list-item>';
-
     return text;
 }
 
@@ -118,4 +124,11 @@ function ConstructDriverBar() {
     text += '</div>'; // DRIVER BAR
 
     return text;
+}
+
+function DriverSelection(sender) {
+    console.log('yo');
+    let element = document.getElementById(sender.id);
+    element.innerHTML = ConstructTheBar('FL', false);
+
 }

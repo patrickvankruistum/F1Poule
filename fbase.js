@@ -75,6 +75,24 @@ function CreateNewUser(userName, firstName, password) {
     });
 }
 
+function GetDrivers() {
+
+    let text = ''
+        // let ref = database.ref('/drivers/');
+    database.ref('drivers').orderByChild('sorting').on("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+            if (data.key != null) {
+                console.log(snapshot.child(data.key).val().lastname);
+                let lastname = snapshot.child(data.key).val().lastname;
+                text += '<ons-list-item class="menuItem" onclick=DriverSelected(this) tappable><div><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + lastname.toLowerCase() + '_helmet.png" style="max-width: 35px"/></div>' + '<div>' + data.key + '</div></ons-list-item>';
+            }
+        });
+        ConstructDriverMenu(text);
+    });
+
+
+}
+
 function AddTimeDateOfFp1() {
 
     return;

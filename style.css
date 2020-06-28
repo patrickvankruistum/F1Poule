@@ -263,3 +263,8 @@
     vertical-align: top;
     line-height: 40px;
 }
+
+#divPopoverAddDriver {
+    max-height: 350px;
+    overflow-y: auto;
+}

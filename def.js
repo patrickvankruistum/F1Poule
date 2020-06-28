@@ -100,5 +100,5 @@ var puntenSysteem = [{
 
 function GetPointValue(result) {
     let lookUpValue = puntenSysteem.find(x => x.id === result);
-    return lookUpValue.points;
+    return lookUpValue.points + 'pt.';
 }

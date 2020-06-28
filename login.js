@@ -1,10 +1,8 @@
 var checkStart;
 (checkStart = function() {
 
-    GetPointValue('PP');
     ToggleBusyIndicator(true);
-
-    // document.querySelector('ons-back-button').options = { refresh: true };
+    GetDrivers();
     var c = readCookie('token');
 
     if (c == null) {

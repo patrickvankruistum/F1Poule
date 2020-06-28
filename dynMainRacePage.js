@@ -82,7 +82,7 @@ function ConstructMainRacePageListVoorspelling(raceData) {
 
 function ConstructMainRacePageListItem(no, empty) {
     let text = '';
-    text += '<ons-list-item id="driver' + no + '" class="selectDriverButton" tappable onclick="DriverSelection(this)">';
+    text += '<ons-list-item id="driver' + no + '" points="' + no + '" class="selectDriverButton" tappable onclick="DriverSelection(this)">';
     text += ConstructTheBar(no, empty);
     text += '</ons-list-item>';
 
@@ -95,7 +95,7 @@ function ConstructTheBar(no, empty) {
     text += '<div class="bigNumberPointContainer">'
     text += '<div class="bigNumber">' + no; // BIG NUMBER
     text += '</div>'; // END BIG NUMBER
-    text += '<div class="points">' + GetPointValue(no) + 'pt.'; // POINTS
+    text += '<div class="points">' + GetPointValue(no); // POINTS
     text += '</div>'; // END POINTS
     text += '</div>'; // END CONTAINER FOR NUMBER AND SCORE
     if (!empty) text += ConstructDriverBar();
@@ -127,8 +127,13 @@ function ConstructDriverBar() {
 }
 
 function DriverSelection(sender) {
-    console.log('yo');
-    let element = document.getElementById(sender.id);
-    element.innerHTML = ConstructTheBar('FL', false);
+    // let element = document.getElementById(sender.id);
+    // let attribute = element.getAttribute('points');
+    // element.innerHTML = ConstructTheBar(attribute, false);
+    showDriverSelect(sender);
+
+}
+
+function DriverSelected() {
 
 }

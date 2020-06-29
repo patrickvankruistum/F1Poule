@@ -266,7 +266,7 @@
 
 #divPopoverAddDriver {
     max-height: 350px;
-    width: 300px;
+    width: 218px;
     overflow-y: auto;
 }
 
@@ -316,17 +316,17 @@
 
 #driverSelectDescriptionContainer {
     width: 200px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #driverSelectDescription {
     float: left;
     width: 51px;
-    position: inline;
+    /* position: inline; */
 }
 
 #driverSelectVerwijder {
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-right: 10px;
     float: right;
 }

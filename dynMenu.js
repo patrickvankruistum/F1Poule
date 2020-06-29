@@ -35,9 +35,11 @@ var ConstructAnotherMenu;
 function ConstructDriverMenu(drivers) {
     let menuHTML = '<ons-list>';
     menuHTML += '<ons-list-header id="driverSelect"><div id="driverSelectDescriptionContainer"><div id="driverSelectDescription">Selecteer</div><div id="driverSelectVerwijder" onclick="deselectDriver()">Verwijder</div></div></ons-list-header>';
+    menuHTML += '<div style="margin-top:25px;">';
+
     // menuHTML += '<ons-list-header><div">Selecteer</div>></ons-list-header>';
     menuHTML += drivers;
-
+    menuHTML += '</div>';
     menuHTML += '</ons-list>';
 
     document.getElementById('divPopoverAddDriver').innerHTML = menuHTML;
@@ -69,9 +71,30 @@ function hidePopoverAddUser() {
 }
 
 function showDriverSelect(target) {
+
+    let driverItemLists = document.getElementsByClassName('driverSelectMenuItem');
+    for (var i = 0; i <= driverItemLists.length - 1; i++) {
+        driverItemLists[i].style.display = 'block';
+    }
+
+    if (target.id != 'driverPP' && target.id != 'driverFL') {
+        for (var i = 1; i <= 10; i++) {
+            let loopElement = document.getElementById('driverBar' + i);
+            let initials = loopElement.dataset.initials;
+            if (initials != '' && initials != undefined) {
+                let findElement = document.getElementById('driverItemList' + initials);
+                findElement.style.display = 'none';
+
+            }
+        }
+    }
+
     let element = document.getElementById('popoverDriverSelect');
     element.setAttribute('data-sender', target.id);
-    element.show(target);
+
+    let newTarget = document.getElementById('toolbarTitle')
+
+    element.show(newTarget);
 }
 
 function hideDriverSelect() {

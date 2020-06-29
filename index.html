@@ -155,9 +155,20 @@
         <div id='divPopoverAddUser' style="padding: 1px">
         </div>
     </ons-popover>
-    <ons-popover direction="up down" id="popoverDriverSelect" cancelable>
-        <div id='divPopoverAddDriver' style="padding: 1px">
+    <ons-popover direction="down" id="popoverDriverSelect" cancelable>
+        <div class="popover-mask popover-mask--material" style="margin-left:5.25vw; margin-right:5.25vw"></div>
+        <div class="popover popover--material popover--left">
+            <div class="popover__arrow popover--material__arrow popover--left__arrow"></div>
+            <!-- //style="top: 50px; left: 65px;" -->
+            <div class="popover__content popover--material__content popover--left__content" style="width: 90vw; height: 125vw">
+                <div style="text-align: center; opacity: 0.8; margin-top: 0px;">
+                    <div id='divPopoverAddDriver' style="padding: 0px; width: 89.5vw; height: 100% ">
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- <div id='divPopoverAddDriver' style="padding: 1px">
+        </div> -->
     </ons-popover>
 
     <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>

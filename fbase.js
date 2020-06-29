@@ -98,8 +98,8 @@ function GetDrivers() {
         snapshot.forEach(function(data) {
             if (data.key != null) {
                 let driver = snapshot.child(data.key).val();
-
-                text += '<ons-list-item id="driverItemList' + data.key + '" data-initials="' + data.key + '" data-firstname="' + driver.firstname + '" data-lastname="' + driver.lastname + '" data-team="' + driver.teamname + '" data-country="' + driver.country + '" data-color="' + driver.teamcolor + '" class="menuItem" onclick=DriverSelected(this) tappable>'
+                // text += '<div style="display: none">'
+                text += '<ons-list-item style="display: visible" id="driverItemList' + data.key + '" data-initials="' + data.key + '" data-firstname="' + driver.firstname + '" data-lastname="' + driver.lastname + '" data-team="' + driver.teamname + '" data-country="' + driver.country + '" data-color="' + driver.teamcolor + '" class="driverSelectMenuItem" onclick=DriverSelected(this) tappable>'
                 text += '<div class="driverSelectMainContainer">';
                 text += '<div class="driverSelectNumber"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driver.number + '.png" style="max-width: 35px"/></div>'
                 text += '<div class="driverSelectHelmet"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(driver.lastname).toLowerCase() + '_helmet.png" style="max-width: 35px"/></div>'
@@ -109,7 +109,7 @@ function GetDrivers() {
 
                 text += '</div>';
                 text += '</ons-list-item>';
-
+                // text += '</div>'
 
 
             }
@@ -142,7 +142,7 @@ function DriverSelected(sender) {
     let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr);
     ref.child(code).set(driver);
 
-    ConstructDriverBar(targetElement.id, sender.dataset.firstname, sender.dataset.lastname, sender.dataset.team, sender.dataset.country, sender.dataset.color);
+    ConstructDriverBar(targetElement.id, sender.dataset.firstname, sender.dataset.lastname, sender.dataset.team, sender.dataset.country, sender.dataset.color, driver);
     hideDriverSelect();
 }
 

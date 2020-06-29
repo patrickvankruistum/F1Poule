@@ -1,6 +1,8 @@
 var checkStart;
 (checkStart = function() {
 
+    // toggleToast('success');
+
     ToggleBusyIndicator(true);
     GetDrivers();
     var c = readCookie('token');

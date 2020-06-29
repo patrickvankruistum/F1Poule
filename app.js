@@ -128,3 +128,22 @@ function setCountDownElement() {
 // }
 
 // document.querySelector('#navigator').popPage({ refresh: true });
+
+
+
+// function ShowToast(text) {
+
+
+
+//     ons.notification.toast(text, {
+//         timeout: 2000,
+//         id: 'toast',
+//         message: 'fuck'
+//     });
+// }
+
+// function toggleToast(modifier) {
+//     document
+//         .querySelector('ons-toast[modifier~=' + modifier)
+//         .toggle();
+// }

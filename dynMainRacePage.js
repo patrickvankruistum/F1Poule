@@ -33,12 +33,12 @@ function ConstructMainRacePageListVoorspelling(raceData, arr) {
     text += '<div class="countDownBlock">' + '<div class="countDownBlockTop">' + timeLeft.minutes + '</div><div class="countDownBlockUnder">min</div>' + '</div>'
     text += '</div>';
 
-    text += '<ons-list-header><div>Pole Position</div></ons-list-header>';
+    text += '<ons-list-header><div class="predictionHeaders">Pole Position</div></ons-list-header>';
     text += ConstructMainRacePageListItem('PP', arr);
 
-    text += '<ons-list-header><div>Snelste Race Ronde</div></ons-list-header>';
+    text += '<ons-list-header><div class="predictionHeaders">Snelste Race Ronde</div></ons-list-header>';
     text += ConstructMainRacePageListItem('FL', arr);
-    text += '<ons-list-header><div>Uitslag race</div></ons-list-header>';
+    text += '<ons-list-header><div class="predictionHeaders">Uitslag race</div></ons-list-header>';
 
     var i;
     for (i = 1; i <= 10; i++) {
@@ -50,7 +50,7 @@ function ConstructMainRacePageListVoorspelling(raceData, arr) {
 
 function ConstructMainRacePageListItem(no, arr) {
     let text = '';
-    text += '<ons-list-item id="driver' + no + '" points="' + no + '" class="selectDriverButton" tappable onclick="DriverSelection(this)">';
+    text += '<ons-list-item id="driver' + no + '" points="' + no + '" class="selectDriverButton" tappable onclick="showDriverSelect(this)">';
     text += ConstructTheBar(no, arr);
     text += '</ons-list-item>';
 
@@ -96,21 +96,21 @@ function ConstructEmptyDriverBar(no) {
 
 function ConstructDriverBarInsteadOfNewBar(no, driver) {
     let sender = document.getElementById('driverItemList' + driver);
-
     let firstName = sender.dataset.firstname;
     let lastName = sender.dataset.lastname;
     let team = sender.dataset.team;
     let country = sender.dataset.country;
     let c = String(country).toLowerCase().replace('ë', 'e');
-    let color = sender.dataset.color
+    let color = sender.dataset.color;
+    let initials = sender.dataset.initials;
 
     let text = '';
-    text += '<div id="driverBar' + no + '" class="driverBar">'; // DRIVER BAR
+    text += '<div data-initials="' + initials + '" id="driverBar' + no + '" class="driverBar">'; // DRIVER BAR
 
     text += '<div class="driverPicture"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + String(lastName).toLowerCase() + '.png" style="max-width: 50px"/></div>'; // DRIVER PICTURE
     text += '<div class="driverColorContainer" style="color:' + color + '">|</div>'; // DRIVER COLOR
     text += '<div class="driverInfo">'; // DRIVER INFO
-    text += '<div class="driverInfoUp">' + firstName + ' ' + lastName + '</div>'; // DRIVER INFO NAME
+    text += '<div class="driverInfoUp">' + firstName + ' ' + lastName.toUpperCase() + '</div>'; // DRIVER INFO NAME
     text += '<div class="driverInfoDown">' + team + '</div>'; // DRIVER INFO TEAM
     text += '</div>'; // DRIVER INFO
     text += '<div class="driverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + c + '.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
@@ -120,11 +120,12 @@ function ConstructDriverBarInsteadOfNewBar(no, driver) {
 
 }
 
-function ConstructDriverBar(elementId, firstName, lastName, team, country, color) {
+function ConstructDriverBar(elementId, firstName, lastName, team, country, color, initials) {
     let c = String(country).toLowerCase().replace('ë', 'e');
     let newId = elementId.replace('driver', 'driverBar');
 
     let element = document.getElementById(newId);
+    element.setAttribute('data-initials', initials);
     element.setAttribute('class', 'driverBar');
 
     let text = '';
@@ -139,8 +140,4 @@ function ConstructDriverBar(elementId, firstName, lastName, team, country, color
 
 
     element.innerHTML = text;
-}
-
-function DriverSelection(sender) {
-    showDriverSelect(sender);
 }

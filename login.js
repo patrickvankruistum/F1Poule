@@ -13,6 +13,8 @@ var checkStart;
         return;
     }
 
+
+
     currentUsr = c.substring(0, 3);
 
     RemoveOldTokensFromDatabase();

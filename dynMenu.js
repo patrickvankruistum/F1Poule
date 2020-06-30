@@ -34,7 +34,7 @@ var ConstructAnotherMenu;
 
 function ConstructDriverMenu(drivers) {
     let menuHTML = '<ons-list>';
-    menuHTML += '<ons-list-header id="driverSelect"><div id="driverSelectDescriptionContainer"><div id="driverSelectDescription">Selecteer</div><div id="driverSelectVerwijder" onclick="deselectDriver()">Verwijder</div></div></ons-list-header>';
+    menuHTML += '<ons-list-header id="driverSelect"><div id="driverSelectDescriptionContainer"><div id="driverSelectDescription">Selecteer</div></div></ons-list-header>';
     menuHTML += '<div style="margin-top:25px;">';
 
     // menuHTML += '<ons-list-header><div">Selecteer</div>></ons-list-header>';
@@ -79,7 +79,8 @@ function showDriverSelect(target) {
 
     if (target.id != 'driverPP' && target.id != 'driverFL') {
         for (var i = 1; i <= 10; i++) {
-            let loopElement = document.getElementById('driverBar' + i);
+            let loopElement = document.getElementById('predictionDriver' + i);
+
             let initials = loopElement.dataset.initials;
             if (initials != '' && initials != undefined) {
                 let findElement = document.getElementById('driverItemList' + initials);
@@ -88,6 +89,11 @@ function showDriverSelect(target) {
             }
         }
     }
+
+    let code = target.id.replace('predictionDriver', '');
+
+    let carousel = document.getElementById('predictionDriverCarousel' + code);
+    if (carousel.getActiveIndex() === 0) carousel.setActiveIndex(1);
 
     let element = document.getElementById('popoverDriverSelect');
     element.setAttribute('data-sender', target.id);

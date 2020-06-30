@@ -68,6 +68,19 @@ document.addEventListener('init', function(event) {
         if (page.id === 'mainRacePage') {
 
         } else if (page.id === 'raceUitslag') {
+
+            let elements = document.querySelectorAll('ons-carousel');
+
+            for (i = 0; i <= elements.length - 1; i++) {
+
+
+                // elements[i].addEventListener('postchange', function(e) {
+
+                //     if (e.lastActiveIndex === 1) {
+                //         deselectDriver(e.target);
+                //     }
+                // });
+            }
             // testerino();
         }
 
@@ -86,11 +99,9 @@ function setCountDownElement() {
 };
 
 // function testerino() {
-//     console.log('try to start timer');
 //     clearInterval(intervalId);
 
 //     if (intervalId != undefined) {
-//         console.log('shit already exists');
 //         return;
 //     }
 
@@ -106,24 +117,20 @@ function setCountDownElement() {
 // }
 
 // function testerino() {
-//     console.log('try to start timer');
 //     clearInterval(intervalId);
 
 //     if (intervalId != undefined) {
-//         console.log('shit already exists');
 //         return;
 //     }
 
 //     // var timeleft = 10;
 //     intervalId = setInterval(function() {
 //         if (delta <= 0) {
-//             console.log('must clear');
 //             clearInterval(intervalId);
 //         } else {
 //             UpdateTimeLeft();
 //         }
 //         delta -= 1;
-//         console.log(delta);
 //     }, 1000);
 // }
 

@@ -28,7 +28,6 @@ function RemoveOldTokensFromDatabase() {
 }
 
 function ReadCircuits() {
-    console.log('fire readcircuits');
     let nav = document.getElementById('races.html');
     let r = database.ref('races');
     let circuits = '';
@@ -42,7 +41,6 @@ function ReadCircuits() {
 
     });
 }
-
 
 function GetRacePage(sender) {
     let page = document.getElementById('race.html');
@@ -70,6 +68,7 @@ function GetRacePage(sender) {
 
                 ons.ready(function() {
                     navigator.pushPage('mainRace.html');
+
                     ToggleBackButton(true);
                 });
 
@@ -115,65 +114,37 @@ function GetDrivers() {
             }
         });
         ConstructDriverMenu(text);
-
-
-
-
-
-
-
     });
-
-
 }
 
 function DriverSelected(sender) {
-
     let element = document.getElementById("popoverDriverSelect");
     let targetElement = document.getElementById(element.dataset.sender);
-    let code = String(targetElement.id.replace('driver', ''));
+
+    let code = String(targetElement.id.replace('predictionDriver', ''));
     let driver = sender.dataset.initials;
 
-    // console.log(targetElement.dataset.driver);
-
-
     if (code === '' || driver === '' || currentUsr === '') return;
+
+    InjectNewDriverInfo(code, driver);
 
     let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr);
     ref.child(code).set(driver);
 
-    ConstructDriverBar(targetElement.id, sender.dataset.firstname, sender.dataset.lastname, sender.dataset.team, sender.dataset.country, sender.dataset.color, driver);
     hideDriverSelect();
 }
 
-function deselectDriver() {
-    let element = document.getElementById('popoverDriverSelect');
-
-    let sender = element.dataset.sender;
-    // let realElement = document.getElementById(sender);
-    let code = sender.replace('driver', '');
-    var superElement = document.getElementById('driverBar' + code);
-    if (superElement.getAttribute('class') === 'driverBarEmpty') {
-        hideDriverSelect();
-        return;
-    }
 
 
+function deselectDriver(sender) {
+
+    let code = sender.id.replace('predictionDriverCarouselDeselectButton', '');
 
     if (code === '' || currentRaceOpened === '' || currentUsr === '') return;
-
     let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr + '/');
     ref.child(ref.child(code).key).remove();
-    //console.log(ref.child(code).key);
-    //ref.child(code).set(driver);
-
-
-    superElement.setAttribute('class', 'driverBarEmpty');
-    superElement.innerHTML = 'selecteer een coureur';
-
-    hideDriverSelect();
-
-    // realElement.innerHTML = ConstructTheBar(code, null);
+    DestructDriverInfo(code);
+    // DeleteDriverCarousel(code);
 }
 
 // function AddTimeDateOfFp1() {

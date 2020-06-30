@@ -101,59 +101,36 @@
 }
 
 .selectDriverButton {
-    overflow: hidden;
+    /* overflow: hidden;
     position: relative;
-    height: 80px;
+    height: 80px; */
 }
 
 .completeBar {
+    position: absolute;
     height: 96%;
     width: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
     min-width: 568;
-}
-
-.bigNumberPointContainer {
-    width: 60px;
-    height: 100%;
-    float: left;
-}
-
-.bigNumber {
-    font-family: 'F1Bold';
-    font-size: 28px;
-    width: 60px;
-    height: 30px;
-    text-align: center;
-    margin-top: 20px;
-    color: darkgray;
-    margin-right: 10px;
-}
-
-.points {
-    font-family: 'F1Bold';
-    width: 60px;
-    height: 40px;
-    font-size: 11px;
-    margin-top: 0px;
-    text-align: center;
-    color: darkgray;
+    top: -10px;
+    border: 1px solid purple;
 }
 
 .driverBar {
-    margin-left: 20px;
+    margin-left: 0px;
     height: 100%;
+    border: 1px solid red;
 }
 
 .driverBarEmpty {
+    position: absolute;
     font-family: 'F1Bold';
     line-height: 70px;
-    text-align: center;
     font-size: 20px;
     color: rgb(42, 42, 42);
     height: 100%;
+    width: 100%;
+    text-align: center;
+    /* border: 1px solid red; */
 }
 
 .driverPicture {
@@ -175,27 +152,29 @@
     margin-left: 5px;
 }
 
-.driverInfo {
-    margin-top: 18px;
-    height: 40px;
-    float: left;
-}
-
-.driverInfoUp {
-    font-family: 'F1Bold';
-    font-size: 11px;
-}
-
-.driverInfoDown {
-    font-family: 'F1Regular';
-    font-size: 9px;
-}
-
-.driverFlag {
+.driverRemoveFlagParent {
+    position: relative;
+    height: 70px;
+    width: 60px;
     float: right;
+    /* border: 1px solid green; */
+    margin-top: 5px;
+    text-align: center;
+}
+
+.driverRemove {
+    font-family: 'F1Bold';
+    position: relative;
+    /* margin: auto; */
     width: 35px;
+    height: 25px;
+    margin-left: 25px;
     margin-right: 10px;
-    margin-top: 25px;
+    margin-top: 0px;
+    color: darkgray;
+    /* border: 1px solid green; */
+    top: 0;
+    z-index: 99;
 }
 
 .raceHeaderWithCountdown {
@@ -252,11 +231,6 @@
     text-align: center;
     vertical-align: top;
     line-height: 40px;
-}
-
-#divPopoverAddDriver {
-    /* width: 218px; */
-    /* overflow-y: auto; */
 }
 
 .driverSelectMainContainer {
@@ -323,4 +297,148 @@
     text-align: center;
     color: black;
     background-color: black;
+}
+
+.selectDriverButtonCarousel {
+    /* margin-top: -5px;
+    height: 70px;
+    width: 25%;
+    overflow: visible !important; */
+    /* border: 1px solid green; */
+}
+
+.driverCarouselItem {
+    /* position: absolute; */
+    /* width: 400px !important; */
+    /* padding: 0 12px;
+    box-sizing: border-box; */
+    /* border: 1px solid green; */
+}
+
+
+/* Start of the madness */
+
+.predictionDriverCarousel {
+    width: 20vw;
+    overflow: visible !important;
+    height: 73px;
+    top: 0;
+}
+
+.predictionDriverCarouselDeselect {
+    color: white;
+    padding: 0 12px;
+    box-sizing: border-box;
+    line-height: 73px;
+    background-color: rgb(179, 53, 53);
+    border-right: 0.5px solid rgb(22, 21, 21);
+    text-align: center;
+}
+
+.predictionDriverCarouselDeselectButton {
+    position: absolute;
+    /* border: 1px solid black; */
+    float: left;
+    left: 0;
+    padding: 22px;
+}
+
+.predictionDriverCarouselSelect {
+    position: absolute;
+    width: 100vw !important;
+}
+
+.predictionDriverListItem {
+    padding: 0;
+    height: 73px;
+    /* border: 1px solid teal; */
+}
+
+.predictionDriverTypePointContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 73px;
+    width: 60px;
+}
+
+.predictionDriverType {
+    font-family: 'F1Bold';
+    font-size: 28px;
+    width: 60px;
+    height: 43px;
+    text-align: center;
+    /* margin-top: 20px; */
+    color: darkgray;
+    margin-right: 10px;
+    /* border: 1px solid blue; */
+    line-height: 45px;
+}
+
+.predictionDriverPoints {
+    font-family: 'F1Bold';
+    width: 60px;
+    height: 30px;
+    font-size: 11px;
+    margin-top: 0px;
+    text-align: center;
+    color: darkgray;
+    /* border: 1px solid green; */
+}
+
+.predictionDriverSelectContainer {
+    float: right;
+    position: relative;
+    margin-top: -12px;
+    height: 69px;
+    width: 100%;
+    /* border: 1px solid yellow; */
+    margin-left: 49px;
+}
+
+.predictionDriverPicture {
+    float: left;
+    margin-top: 10px;
+}
+
+.predictionDriverColor {
+    float: left;
+    font-family: 'F1Regular';
+    margin-top: 23px;
+    font-size: 38px;
+    margin-left: 0px;
+}
+
+.predictionDriverInfo {
+    margin-top: 17px;
+    height: 40px;
+    float: left;
+    margin-left: 5px;
+}
+
+.predictionDriverInfoName {
+    font-family: 'F1Bold';
+    font-size: 11px;
+}
+
+.predictionDriverTeamName {
+    color: rgb(77, 77, 77);
+    font-family: 'F1Bold';
+    font-size: 9px;
+}
+
+.predictionDriverFlag {
+    float: right;
+    /* margin: auto; */
+    width: 35px;
+    margin-right: 20px;
+    margin-top: 25px;
+}
+
+.predictionDriverEmpty {
+    width: 100vw;
+    position: relative;
+    text-align: center;
+    font-family: 'F1Bold';
+    color: rgb(77, 77, 77);
 }

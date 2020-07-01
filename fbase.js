@@ -43,6 +43,7 @@ function ReadCircuits() {
 }
 
 function GetRacePage(sender) {
+    ToggleBusyIndicator(true);
     let page = document.getElementById('race.html');
     let record = sender.getAttribute('record');
     let ref = database.ref('/races/' + record);
@@ -70,6 +71,7 @@ function GetRacePage(sender) {
                     navigator.pushPage('mainRace.html');
 
                     ToggleBackButton(true);
+                    ToggleBusyIndicator(false);
                 });
 
             });

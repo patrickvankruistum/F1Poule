@@ -124,12 +124,29 @@ function DriverSelected(sender) {
     let code = String(targetElement.id.replace('predictionDriver', ''));
     let driver = sender.dataset.initials;
 
-    if (code === '' || driver === '' || currentUsr === '') return;
+    if (code === '' || driver === '' || currentUsr === '' || currentRaceOpened === '') return;
 
-    InjectNewDriverInfo(code, driver);
+    let raceRef = database.ref('/races/' + currentRaceOpened);
 
-    let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr);
-    ref.child(code).set(driver);
+    raceRef.once("value", snapshot => {
+        if (snapshot.exists()) {
+
+            const raceData = snapshot.val();
+
+            let expirationDate = Date.parse(new Date(raceData.FP1));
+            let currentDate = Date.parse(new Date());
+
+            if (expirationDate <= currentDate) {
+                ons.notification.toast('Kan deze race niet meer aanpassen.', { timeout: 2000, modifier: 'thick' });
+            } else {
+                InjectNewDriverInfo(code, driver);
+
+                let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr);
+                ref.child(code).set(driver);
+
+            }
+        }
+    });
 
     hideDriverSelect();
 }
@@ -141,10 +158,27 @@ function deselectDriver(sender) {
     let code = sender.id.replace('predictionDriverCarouselDeselectButton', '');
 
     if (code === '' || currentRaceOpened === '' || currentUsr === '') return;
-    let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr + '/');
-    ref.child(ref.child(code).key).remove();
-    DestructDriverInfo(code);
-    // DeleteDriverCarousel(code);
+
+    let raceRef = database.ref('/races/' + currentRaceOpened);
+
+    raceRef.once("value", snapshot => {
+        if (snapshot.exists()) {
+
+            const raceData = snapshot.val();
+
+            let expirationDate = Date.parse(new Date(raceData.FP1));
+            let currentDate = Date.parse(new Date());
+
+            if (expirationDate <= currentDate) {
+                ons.notification.toast('Kan deze race niet meer aanpassen.', { timeout: 2000, modifier: 'thick' });
+            } else {
+                let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr + '/');
+                ref.child(ref.child(code).key).remove();
+                DestructDriverInfo(code);
+            }
+        }
+
+    });
 }
 
 // function AddTimeDateOfFp1() {

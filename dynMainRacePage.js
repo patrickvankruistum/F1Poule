@@ -2,7 +2,7 @@ var currentRaceOpened = '';
 
 function ConstructRacePage(raceData, key, arr) {
     if (key != '') currentRaceOpened = key;
-    return '<ons-page id="race">' + ConstructMainRacePageList(raceData, arr) + '</ons-page>'
+    return '<ons-page id="race">' + ConstructMainRacePageList(raceData, arr) + '</ons-page>';
 }
 
 function ConstructMainRacePageList(raceData, arr) {
@@ -11,32 +11,46 @@ function ConstructMainRacePageList(raceData, arr) {
     let text = '';
     text += '<ons-list id="mainList" style="margin-top:' + (h) + 'px">';
     text += ConstructMainRacePageListVoorspelling(raceData, arr);
-    text += '</ons-list>'
+    text += '</ons-list>';
 
     return text;
 }
 
 function ConstructMainRacePageListVoorspelling(raceData, arr) {
-    let text = ConstructCountDownBlock(raceData);
+
+    let expirationDate = Date.parse(new Date(raceData.FP1));
+    let currentDate = Date.parse(new Date());
+
+    let allowModify = true;
+    if (currentDate >= expirationDate)
+        allowModify = false;
+
+    let text = ConstructCountDownBlock(raceData, allowModify);
     text += '<ons-list-header><div class="predictionHeaders">Pole Position</div></ons-list-header>';
-    text += ConstructMainRacePageListItem('PP', arr);
+    text += TestCarousel('PP', arr, allowModify);
 
     text += '<ons-list-header><div class="predictionHeaders">Snelste Race Ronde</div></ons-list-header>';
-    text += ConstructMainRacePageListItem('FL', arr);
+    text += TestCarousel('FL', arr, allowModify);
     text += '<ons-list-header><div class="predictionHeaders">Uitslag race</div></ons-list-header>';
 
     var i;
     for (i = 1; i <= 10; i++) {
-        text += ConstructMainRacePageListItem(i.toString(), arr);
+        text += TestCarousel(i.toString(), arr, allowModify);
     }
 
     return text;
 }
 
-function ConstructCountDownBlock(raceData) {
+function ConstructCountDownBlock(raceData, allowModify) {
     let fp1Date = new Date(raceData.FP1);
     delta = fp1Date - new Date();
     let timeLeft = new TimeLeft(fp1Date);
+
+    if (!allowModify) {
+        timeLeft.days = "00";
+        timeLeft.hours = "00";
+        timeLeft.minutes = "00";
+    }
 
     let text = '';
     text += '<div id="mainCountDown">';
@@ -49,7 +63,10 @@ function ConstructCountDownBlock(raceData) {
     return text;
 }
 
-function ConstructMainRacePageListItem(no, arr) {
+// THE BETTER CODE
+
+function TestCarousel(no, arr, allowModify) {
+
     if (arr == undefined) arr = [];
 
     let driver;
@@ -61,17 +78,6 @@ function ConstructMainRacePageListItem(no, arr) {
         driver = found[1];
     }
 
-    //text += '<ons-list-item id="driver' + no + '" points="' + no + '" class="predictionDriverListItem" tappable>';
-    //onclick="showDriverSelect(this)
-    //text += AddCarousel(no, driver);
-    //text += '</ons-list-item>';
-
-    return TestCarousel(no, driver);
-}
-
-// THE BETTER CODE
-
-function TestCarousel(no, driver) {
 
     let swipeable = 'swipeable';
     let initials = ''
@@ -80,6 +86,14 @@ function TestCarousel(no, driver) {
         swipeable = '';
     } else initials = driver;
 
+    let onClickEvent = 'onclick="showDriverSelect(this)"';
+    let tappable = 'tappable'
+    if (!allowModify) {
+        swipeable = '';
+        onClickEvent = '';
+        tappable = '';
+    }
+
     let text = '<ons-carousel id="predictionDriverCarousel' + no + '" class="predictionDriverCarousel" ' + swipeable + ' style="height: 72px;" initial-index="1" auto-scroll>'
 
     text += '<ons-carousel-item class="predictionDriverCarouselDeselect">'
@@ -87,7 +101,7 @@ function TestCarousel(no, driver) {
     text += '</ons-carousel-item>'
 
     text += '<ons-carousel-item class="predictionDriverCarouselSelect">'
-    text += '<ons-list-item id="' + 'predictionDriver' + no + '" class="predictionDriverListItem" data-initials="' + initials + '" onclick="showDriverSelect(this)" tappable>';
+    text += '<ons-list-item id="' + 'predictionDriver' + no + '" class="predictionDriverListItem" data-initials="' + initials + '" ' + onClickEvent + ' ' + tappable + '>';
 
     text += '<div class="predictionDriverTypePointContainer">'
     text += '<div class="predictionDriverType">' + no // BIG NUMBER

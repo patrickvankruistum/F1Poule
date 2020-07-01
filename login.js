@@ -14,6 +14,9 @@ var checkStart;
     }
 
 
+    //ons.notification.toast('This is an alert!', { timeout: 2000, modifier: 'thick' });
+
+
 
     currentUsr = c.substring(0, 3);
 

@@ -293,26 +293,14 @@
     margin-bottom: 50px;
 }
 
-#toast {
-    text-align: center;
-    color: black;
-    background-color: black;
-}
 
-.selectDriverButtonCarousel {
-    /* margin-top: -5px;
-    height: 70px;
-    width: 25%;
-    overflow: visible !important; */
-    /* border: 1px solid green; */
-}
+/* Toast  */
 
-.driverCarouselItem {
-    /* position: absolute; */
-    /* width: 400px !important; */
-    /* padding: 0 12px;
-    box-sizing: border-box; */
-    /* border: 1px solid green; */
+.toast--thick__message,
+.toast--thick__button {
+    left: auto;
+    font-family: 'F1Bold';
+    font-weight: 700;
 }
 
 

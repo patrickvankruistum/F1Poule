@@ -76,8 +76,7 @@ function showDriverSelect(target) {
     for (var i = 0; i <= driverItemLists.length - 1; i++) {
         driverItemLists[i].style.display = 'block';
     }
-
-    if (target.id != 'driverPP' && target.id != 'driverFL') {
+    if (target.id != 'predictionDriverPP' && target.id != 'predictionDriverFL') {
         for (var i = 1; i <= 10; i++) {
             let loopElement = document.getElementById('predictionDriver' + i);
 

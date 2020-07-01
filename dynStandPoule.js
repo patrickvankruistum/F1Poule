@@ -26,7 +26,6 @@ function ConstructStandPoule(contestants) {
             else positionString = (positionNumber += 1).toString();
         }
 
-        console.log(contestant);
         html += ConstructContestantBar(positionString, contestants[i].initials, contestants[i].name);
     }
 

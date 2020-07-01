@@ -460,7 +460,7 @@
     text-align: center;
     line-height: 66px;
     font-family: 'F1Bold';
-    font-size: 25px;
+    font-size: 22px;
     color: darkgray;
     padding-right: 20px;
 }
@@ -475,4 +475,16 @@
     color: rgb(77, 77, 77);
     font-family: 'F1Bold';
     font-size: 9px;
+}
+
+.contestantPosition {
+    font-family: 'F1Bold';
+    width: 20%;
+    float: left;
+    font-size: 40px;
+    height: 70px;
+    /* border: 1px solid blue; */
+    text-align: center;
+    line-height: 65px;
+    color: darkgray;
 }

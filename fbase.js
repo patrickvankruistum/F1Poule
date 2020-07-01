@@ -183,6 +183,20 @@ function deselectDriver(sender) {
     });
 }
 
+function GetContestants() {
+    database.ref('players').once("value", function(snapshot) {
+
+        let contestants = [];
+
+        snapshot.forEach(function(data) {
+            if (data.key != null) {
+                contestants.push({ initials: data.key, name: snapshot.child(data.key).val().firstname, points: 0 })
+            }
+        });
+        ConstructStandPoule(contestants);
+    });
+}
+
 // function AddTimeDateOfFp1() {
 
 //     return;

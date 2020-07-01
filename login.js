@@ -88,7 +88,7 @@ function GoToMainPage(userId) {
     SetTitle('Matemco F1 2020');
     //loginId.innerHTML = userId;
     ReadCircuits();
-    ConstructStandPoule();
+    GetContestants();
 }
 
 

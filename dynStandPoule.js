@@ -5,30 +5,13 @@ function ConstructStandPoule() {
 
     html = '<ons-page id="standPoule">'
     html += '<ons-list-header  style="margin-top:' + (h) + 'px"><div class="predictionHeaders">HALL OF FAME</div></ons-list-header>';
-
     html += '<ons-list id="mainList">';
-
-
-
-
-
 
     html += GetHallOfFame();
 
-
-    // //html += '<div class="predictionDriverFlag"><img id="' + 'predictionDriverFlag' + no + '"  src="" style="max-width: 35px"/></div>'; // DRIVER FLAG
-    // html += '</div>';
-    // //html += '<div id="' + 'predictionDriverEmpty' + 'PD' + '" class="predictionDriverEmpty" style="display: inline-block">selecteer coureur</div>'
-
-
-
     html += '</ons-list>';
-
     html += '<ons-list-header><div class="predictionHeaders">Stand poule 2020</div></ons-list-header>';
-
     html += '</ons-page>';
-
-
 
     let page = document.getElementById('standPoule.html');
     page.innerHTML = html;

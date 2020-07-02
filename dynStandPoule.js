@@ -47,7 +47,7 @@ function GetHallOfFame() {
     html += '<div class="hallOfFamePersonYear">' + '2019' + '</div>' // BIG NUMBER
 
     html += '<div class="hallOfFamePersonName">Harold</div>';
-    html += '<div class="hallOfFameTeamName">TEAMLEIDER ENGINEERING</div>';
+    html += '<div class="hallOfFameTeamName">THE COMEBACK KID</div>';
     html += '</div>';
 
     html += '</div>';
@@ -64,7 +64,8 @@ function ConstructContestantBar(positie, initials, name) {
     html += '<div class="hallOfFamePersonYear">' + initials + '</div>' // BIG NUMBER
 
     html += '<div class="hallOfFamePersonName">' + name + '</div>';
-    html += '<div class="hallOfFameTeamName">TEKST HIER</div>';
+    // html += '<div class="hallOfFamePersonPoints">' + '0pt.' + '</div>';
+    html += '<div class="hallOfFameTeamName">' + '0 punten' + '</div>';
     html += '</div>';
 
     html += '</div>';

@@ -30,11 +30,40 @@ function RemoveOldTokensFromDatabase() {
 function ReadCircuits() {
     let nav = document.getElementById('races.html');
     let r = database.ref('races');
+    let pastRaceHeader = false;
+    let currentRaceHeader = false;
+    let futureRaceHeader = false;
     let circuits = '';
+    let pastCircuits = '';
     r.once("value", function(snapshot) {
         snapshot.forEach(function(data) {
-            circuits += CreateCircuitElement(snapshot.child(data.key).val(), data.key);
+            let result = snapshot.child(data.key).val().result;
+
+            let fp1Date = Date.parse(snapshot.child(data.key).val().FP1);
+
+            if (fp1Date < Date.now() && result === undefined || fp1Date < Date.now() && Object.keys(result).length < 12) {
+                if (currentRaceHeader === false) {
+                    circuits += '<ons-list-header><div class="predictionHeaders">Actuele Grand-Prix</div></ons-list-header>';
+                    currentRaceHeader = true;
+                }
+                circuits += CreateCircuitElement(snapshot.child(data.key).val(), data.key);
+            } else if (fp1Date < Date.now() && result != undefined && Object.keys(result).length === 12) {
+                if (pastRaceHeader === false) {
+                    pastCircuits += '<ons-list-header><div class="predictionHeaders">Verreden Grand-Prix</div></ons-list-header>';
+                    pastRaceHeader = true;
+                }
+                pastCircuits += CreateCircuitElement(snapshot.child(data.key).val(), data.key);
+            } else {
+                if (futureRaceHeader === false) {
+                    circuits += '<ons-list-header><div class="predictionHeaders">Aankomende Grand-Prix</div></ons-list-header>';
+                    futureRaceHeader = true;
+                }
+                circuits += CreateCircuitElement(snapshot.child(data.key).val(), data.key);
+            }
+
+
         });
+        circuits += pastCircuits;
         nav.innerHTML = ConstructMainPage(circuits);
 
         navigator.pushPage('main.html');
@@ -53,7 +82,7 @@ function GetRacePage(sender) {
 
             const raceData = snapshot.val();
 
-            let ref2 = database.ref('/predictions/' + record + '/' + currentUsr);
+            let ref2 = database.ref('/races/' + record + '/predictions/' + currentUsr);
             ref2.once("value", snapshot2 => {
 
                 let arr;
@@ -76,9 +105,15 @@ function GetRacePage(sender) {
 
             });
 
+            ConstructMainRaceResult(snapshot.val().result);
+
         }
 
+
+
     });
+
+
 
 }
 
@@ -143,7 +178,7 @@ function DriverSelected(sender) {
             } else {
                 InjectNewDriverInfo(code, driver);
 
-                let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr);
+                let ref = database.ref('/races/' + currentRaceOpened + '/predictions/' + currentUsr);
                 ref.child(code).set(driver);
 
             }
@@ -174,7 +209,7 @@ function deselectDriver(sender) {
             if (expirationDate <= currentDate) {
                 ons.notification.toast('Kan deze race niet meer aanpassen.', { timeout: 2000, modifier: 'thick' });
             } else {
-                let ref = database.ref('/predictions/' + currentRaceOpened + '/' + currentUsr + '/');
+                let ref = database.ref('/races/' + currentRaceOpened + '/predictions/' + currentUsr + '/');
                 ref.child(ref.child(code).key).remove();
                 DestructDriverInfo(code);
             }
@@ -183,19 +218,127 @@ function deselectDriver(sender) {
     });
 }
 
-function GetContestants() {
-    database.ref('players').once("value", function(snapshot) {
+function GetPoints(pos, prediction, result) {
+    if (pos === '' || prediction === '' || result === '' || pos === undefined || prediction === undefined || result === undefined)
+        return 0;
 
-        let contestants = [];
-
-        snapshot.forEach(function(data) {
-            if (data.key != null) {
-                contestants.push({ initials: data.key, name: snapshot.child(data.key).val().firstname, points: 0 })
-            }
-        });
-        ConstructStandPoule(contestants);
-    });
+    if (prediction === result) {
+        return parseInt(GetPointValue(pos).replace('pt.', ''));
+    } else {
+        return 0;
+    }
 }
+
+function GetContestants() {
+
+    let totalPlayerPoints = [];
+
+    let raceReference = database.ref('/races/');
+    raceReference.once("value").then(function(snapshot) {
+        snapshot.forEach(function(data) {
+            let raceData = snapshot.child(data.key).val();
+
+            if (raceData.result != undefined) {
+
+                if (raceData.predictions != undefined) {
+
+                    let predictionEntries = Object.entries(raceData.predictions);
+
+                    for (i = 0; i <= Object.keys(raceData.predictions).length - 1; i++) {
+
+                        let playerInitials = predictionEntries[i][0]
+                        let playerPrediction = predictionEntries[i][1];
+
+                        let playerPoints = 0;
+                        playerPoints += GetPoints('PP', playerPrediction['PP'], raceData.result['PP']);
+                        playerPoints += GetPoints('PL', playerPrediction['PL'], raceData.result['PL']);
+                        playerPoints += GetPoints('1', playerPrediction['1'], raceData.result['1']);
+                        playerPoints += GetPoints('2', playerPrediction['2'], raceData.result['2']);
+                        playerPoints += GetPoints('3', playerPrediction['3'], raceData.result['3']);
+                        playerPoints += GetPoints('4', playerPrediction['4'], raceData.result['4']);
+                        playerPoints += GetPoints('5', playerPrediction['5'], raceData.result['5']);
+                        playerPoints += GetPoints('6', playerPrediction['6'], raceData.result['6']);
+                        playerPoints += GetPoints('7', playerPrediction['7'], raceData.result['7']);
+                        playerPoints += GetPoints('8', playerPrediction['8'], raceData.result['8']);
+                        playerPoints += GetPoints('9', playerPrediction['9'], raceData.result['9']);
+                        playerPoints += GetPoints('10', playerPrediction['10'], raceData.result['10']);
+
+                        var findPlayerPoints = totalPlayerPoints.find(x => x.name === playerInitials);
+
+                        if (findPlayerPoints === undefined) {
+                            totalPlayerPoints.push({ initials: playerInitials, points: playerPoints, firstname: '' });
+                        } else {
+                            findPlayerPoints.points += playerPoints;
+                        }
+
+                    }
+                }
+
+            }
+
+        });
+
+
+    });
+
+    let playerReference = database.ref('players');
+    playerReference.once("value").then(function(snapshot) {
+        snapshot.forEach(function(data) {
+            var findPlayerPoints = totalPlayerPoints.find(x => x.initials === data.key);
+            if (findPlayerPoints != undefined) findPlayerPoints.firstname = snapshot.child(data.key).val().firstname;
+        });
+        let sortedPoints = totalPlayerPoints.sort((a, b) => b.points - a.points);
+        ConstructStandPoule(sortedPoints);
+    });
+
+
+
+
+
+
+
+
+
+
+    // let playerReference = database.ref('/players/');
+
+
+
+
+
+
+    // //console.log('NEXT');
+
+    // playerReference.once("value", function(snapshot) {
+    //     console.log('Reading playerReference');
+    //     let contestants = [];
+
+    //     snapshot.forEach(function(data) {
+    //         if (data.key != null) {
+    //             //console.log('name:', data.key);
+
+
+
+    //             //console.log(contestants);
+
+    //             contestants.push({ initials: data.key, name: snapshot.child(data.key).val().firstname, points: 0 })
+    //         }
+    //     });
+    //     //console.log(contestants);
+
+
+    //     //console.log('GOGOGO');
+    //     //navigator.popPage({ 'refresh': true });
+    //     document.getElementById('standPoule.html').innerHTML = '';
+    //     ConstructStandPoule(contestants);
+
+    // });
+
+
+
+    //console.log('LEAVE');
+}
+
 
 // function AddTimeDateOfFp1() {
 

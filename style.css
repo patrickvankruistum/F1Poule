@@ -488,3 +488,20 @@
     line-height: 65px;
     color: darkgray;
 }
+
+
+/* Pull hook */
+
+.pullHookContainer {
+    position: relative;
+    /* border: 1px solid blue; */
+}
+
+.pullHookChild {
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid green; */
+    margin-top: 55px;
+}

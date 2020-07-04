@@ -3,7 +3,8 @@ function ConstructStandPoule(contestants) {
     let h = document.getElementById('toolbar').getBoundingClientRect().height;
     let html = '';
 
-    html = '<ons-page id="standPoule">'
+    html = '<ons-page id="standPoule">';
+    //html += '<ons-pull-hook class="pullHookContainer" id="pullHook"><div class="pullHookChild"><ons-progress-circular indeterminate></ons-progress-circular></div></ons-pull-hook>';
     html += '<ons-list-header  style="margin-top:' + (h) + 'px"><div class="predictionHeaders">HALL OF FAME</div></ons-list-header>';
 
     html += GetHallOfFame();
@@ -13,20 +14,20 @@ function ConstructStandPoule(contestants) {
     html += '<ons-list id="contestantList">';
 
 
-    let positionNumber;
+    let positionNumber = 0;;
 
     for (i = 0; i <= contestants.length - 1; i++) {
+        positionNumber += 1;
         let contestant = contestants[i];
         let positionString;
         if (i === 0) {
-            positionNumber = 1;
             positionString = positionNumber.toString();
         } else {
-            if (contestants[i - 1].position === contestant.position) positionString = '=';
-            else positionString = (positionNumber += 1).toString();
+            if (contestants[i - 1].points === contestant.points) positionString = '=';
+            else positionString = (positionNumber).toString();
         }
 
-        html += ConstructContestantBar(positionString, contestants[i].initials, contestants[i].name);
+        html += ConstructContestantBar(positionString, contestants[i].initials, contestants[i].firstname, contestants[i].points);
     }
 
     html += '</ons-list>';
@@ -36,6 +37,7 @@ function ConstructStandPoule(contestants) {
 
     let page = document.getElementById('standPoule.html');
     page.innerHTML = html;
+
 }
 
 function GetHallOfFame() {
@@ -56,7 +58,7 @@ function GetHallOfFame() {
     return html;
 }
 
-function ConstructContestantBar(positie, initials, name) {
+function ConstructContestantBar(positie, initials, name, points) {
     let html = '<ons-list-item class="predictionDriverListItem">';
 
     html += '<div class="hallOfFamePerson">'
@@ -65,7 +67,7 @@ function ConstructContestantBar(positie, initials, name) {
 
     html += '<div class="hallOfFamePersonName">' + name + '</div>';
     // html += '<div class="hallOfFamePersonPoints">' + '0pt.' + '</div>';
-    html += '<div class="hallOfFameTeamName">' + '0 punten' + '</div>';
+    html += '<div class="hallOfFameTeamName">' + points + ' punten' + '</div>';
     html += '</div>';
 
     html += '</div>';

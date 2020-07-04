@@ -95,7 +95,50 @@ var puntenSysteem = [{
     'points': 25,
 }]
 
+var puntenSysteemF1 = [{
+    'id': 'FL',
+    'points': 1
+}, {
+    'id': 'PP',
+    'points': 0,
+}, {
+    'id': '1',
+    'points': 25,
+}, {
+    'id': '2',
+    'points': 18,
+}, {
+    'id': '3',
+    'points': 15,
+}, {
+    'id': '4',
+    'points': 12,
+}, {
+    'id': '5',
+    'points': 10,
+}, {
+    'id': '6',
+    'points': 8,
+}, {
+    'id': '7',
+    'points': 6,
+}, {
+    'id': '8',
+    'points': 4,
+}, {
+    'id': '9',
+    'points': 2,
+}, {
+    'id': '10',
+    'points': 1,
+}]
+
 function GetPointValue(result) {
     let lookUpValue = puntenSysteem.find(x => x.id === result);
+    return lookUpValue.points + 'pt.';
+}
+
+function GetF1PointValue(result) {
+    let lookUpValue = puntenSysteemF1.find(x => x.id === result);
     return lookUpValue.points + 'pt.';
 }

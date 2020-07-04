@@ -5,7 +5,7 @@ function CreateCircuitElement(data, key) {
     let maand = data.Maand.toString().toUpperCase();
     let text = '';
 
-    text += '<ons-list-item class="raceButton" record="' + key + '" tappable onclick=GetRacePage(this)>'; //onclick=GetRacePage(this)
+    text += '<ons-list-item class="raceButton" record="' + key + '" tappable onclick=GetRacePage(this)>';
     text += '<div class="raceAllInfo">';
     text += '<div class="raceFirstInfo">';
     text += '<div>' + dagen + '</div>';
@@ -49,7 +49,6 @@ function ConstructMainPageList(circuits) {
 
 function ConstructMainPageListUpcomingRaces(circuits) {
     let text = ''
-    text += '<ons-list-header><div class="predictionHeaders">Aankomende Grand-Prix</div></ons-list-header>';
     text += circuits;
     return text;
 }

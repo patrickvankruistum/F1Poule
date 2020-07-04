@@ -59,6 +59,10 @@ document.addEventListener("show", function(event) {
     }
 });
 
+function done() {
+    console.log('cool beans');
+}
+
 document.addEventListener('init', function(event) {
 
 
@@ -67,20 +71,51 @@ document.addEventListener('init', function(event) {
 
         if (page.id === 'mainRacePage') {
 
+        } else if (page.id === 'standF1') {
+            //pullHook.onAction = function(done) {
+
+            //document.getElementById("standPoule.html").contentWindow.location.reload(true);
+
+            //GetContestants();
+
+            //setTimeout(done, 1000);
+            //
+            //navigator.removePage('standPoule.html');
+            //ons.ready(function(done) {
+            //navigator.pushPage('mainRace.html');
+
+
+            //console.log(document.getElementById('standPoule.html').innerHTML);
+
+
+
+
+
+            //console.log('done');
+            //});
+
+
+
+            //}
+
+
+
         } else if (page.id === 'raceUitslag') {
+
+
 
             let elements = document.querySelectorAll('ons-carousel');
 
-            for (i = 0; i <= elements.length - 1; i++) {
+            //for (i = 0; i <= elements.length - 1; i++) {
 
 
-                // elements[i].addEventListener('postchange', function(e) {
+            // elements[i].addEventListener('postchange', function(e) {
 
-                //     if (e.lastActiveIndex === 1) {
-                //         deselectDriver(e.target);
-                //     }
-                // });
-            }
+            //     if (e.lastActiveIndex === 1) {
+            //         deselectDriver(e.target);
+            //     }
+            // });
+            //}
             // testerino();
         }
 

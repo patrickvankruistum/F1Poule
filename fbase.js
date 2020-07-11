@@ -249,9 +249,10 @@ function GetContestants() {
                         let playerInitials = predictionEntries[i][0]
                         let playerPrediction = predictionEntries[i][1];
 
+
                         let playerPoints = 0;
                         playerPoints += GetPoints('PP', playerPrediction['PP'], raceData.result['PP']);
-                        playerPoints += GetPoints('PL', playerPrediction['PL'], raceData.result['PL']);
+                        playerPoints += GetPoints('FL', playerPrediction['FL'], raceData.result['FL']);
                         playerPoints += GetPoints('1', playerPrediction['1'], raceData.result['1']);
                         playerPoints += GetPoints('2', playerPrediction['2'], raceData.result['2']);
                         playerPoints += GetPoints('3', playerPrediction['3'], raceData.result['3']);
@@ -263,7 +264,7 @@ function GetContestants() {
                         playerPoints += GetPoints('9', playerPrediction['9'], raceData.result['9']);
                         playerPoints += GetPoints('10', playerPrediction['10'], raceData.result['10']);
 
-                        var findPlayerPoints = totalPlayerPoints.find(x => x.name === playerInitials);
+                        var findPlayerPoints = totalPlayerPoints.find(x => x.initials === playerInitials);
 
                         if (findPlayerPoints === undefined) {
                             totalPlayerPoints.push({ initials: playerInitials, points: playerPoints, firstname: '' });

@@ -113,7 +113,7 @@ function OnShowCorrectGuesses(correctPredictionsBy) {
     correctPredictionsBy = correctPredictionsBy.split(',');
 
     for (i = 0; i <= correctPredictionsBy.length - 1; i++) {
-        menuHTML += '<ons-list-item class="menuItem">' + correctPredictionsBy[i] + '</ons-list-item>';
+        menuHTML += '<ons-list-item class="menuItemPrediction">' + correctPredictionsBy[i] + '</ons-list-item>';
     }
 
     menuHTML += '</ons-list>';

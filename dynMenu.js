@@ -106,9 +106,10 @@ function hideDriverSelect() {
     document.getElementById('popoverDriverSelect').hide();
 }
 
-function OnShowCorrectGuesses(correctPredictionsBy) {
+function OnShowCorrectGuesses(correctPredictionsBy, no) {
     let menuHTML = '<ons-list>';
-    menuHTML += '<ons-list-header class="menuItem">VOORSPELD DOOR:</ons-list-header>';
+
+    menuHTML += '<ons-list-header class="menuItem"> + ' + GetPointValue(no) + '</ons-list-header>';
 
     correctPredictionsBy = correctPredictionsBy.split(',');
 

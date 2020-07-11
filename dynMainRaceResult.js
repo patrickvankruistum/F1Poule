@@ -70,7 +70,7 @@ function ConstructMainRaceResultEmptyBar(result, no, predictions) {
     }
 
     if (correctCount > 0) {
-        text += "<ons-list-item class='predictionDriverListItem' onclick='OnShowCorrectGuesses(\"" + correctPredictionsBy + "\")' + ' tappable>";
+        text += "<ons-list-item class='predictionDriverListItem' onclick='OnShowCorrectGuesses(\"" + correctPredictionsBy + "\", \"" + no + "\")' + ' tappable>";
     } else {
         text += '<ons-list-item class="predictionDriverListItem">';
     }

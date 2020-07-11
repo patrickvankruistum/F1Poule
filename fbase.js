@@ -105,7 +105,7 @@ function GetRacePage(sender) {
 
             });
 
-            ConstructMainRaceResult(snapshot.val().result);
+            ConstructMainRaceResult(raceData.result, raceData.predictions);
 
         }
 

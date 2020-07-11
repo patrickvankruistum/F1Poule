@@ -97,13 +97,32 @@ function showDriverSelect(target) {
     let element = document.getElementById('popoverDriverSelect');
     element.setAttribute('data-sender', target.id);
 
-    let newTarget = document.getElementById('toolbarTitle')
+    let newTarget = document.getElementById('toolbarTitle');
 
     element.show(newTarget);
 }
 
 function hideDriverSelect() {
     document.getElementById('popoverDriverSelect').hide();
+}
+
+function OnShowCorrectGuesses(correctPredictionsBy) {
+    let menuHTML = '<ons-list>';
+    menuHTML += '<ons-list-header class="menuItem">VOORSPELD DOOR:</ons-list-header>';
+
+    correctPredictionsBy = correctPredictionsBy.split(',');
+
+    for (i = 0; i <= correctPredictionsBy.length - 1; i++) {
+        menuHTML += '<ons-list-item class="menuItem">' + correctPredictionsBy[i] + '</ons-list-item>';
+    }
+
+    menuHTML += '</ons-list>';
+
+    document.getElementById('divPopOverCorrectGuesses').innerHTML = menuHTML;
+
+    let newTarget = document.getElementById('toolbarTitle');
+    document.getElementById('popOverCorrectGuesses').show(newTarget);
+
 }
 
 function OnAddUserClick(target) {

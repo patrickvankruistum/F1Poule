@@ -1,4 +1,4 @@
-function ConstructMainRaceResult(result) {
+function ConstructMainRaceResult(result, predictions) {
     let page = document.getElementById('raceUitslag.html');
     let h = document.getElementById('toolbar').getBoundingClientRect().height;
 
@@ -9,16 +9,16 @@ function ConstructMainRaceResult(result) {
 
     text += '<ons-list id="raceResultList" style="margin-top:' + (h) + 'px">';
     text += '<ons-list-header><div class="predictionHeaders">Pole Position</div></ons-list-header>';
-    text += ConstructMainRaceResultEmptyBar(result, "PP");
+    text += ConstructMainRaceResultEmptyBar(result, "PP", Object.entries(predictions));
     text += '<ons-list-header><div class="predictionHeaders">Snelste Race Ronde</div></ons-list-header>';
 
-    text += ConstructMainRaceResultEmptyBar(result, "FL");
+    text += ConstructMainRaceResultEmptyBar(result, "FL", Object.entries(predictions));
 
     text += '<ons-list-header><div class="predictionHeaders">Uitslag race</div></ons-list-header>';
 
     var i;
     for (i = 1; i <= 10; i++) {
-        text += ConstructMainRaceResultEmptyBar(result, i.toString());
+        text += ConstructMainRaceResultEmptyBar(result, i.toString(), Object.entries(predictions));
     }
 
     text += '</ons-list>';
@@ -27,10 +27,13 @@ function ConstructMainRaceResult(result) {
     page.innerHTML = text;
 }
 
-function ConstructMainRaceResultEmptyBar(result, no) {
+function ConstructMainRaceResultEmptyBar(result, no, predictions) {
     let text = '';
-
+    let correctCount = 0;
     let driver = '';
+
+    let correctPredictionsBy = [];
+
     if (result != undefined) {
 
         //let asdf = Object.keys(result).map(no => result[no])
@@ -41,7 +44,21 @@ function ConstructMainRaceResultEmptyBar(result, no) {
 
         // }
         let r = result[no];
-        if (r != undefined) driver = r;
+        if (r != undefined) {
+            driver = r;
+
+            if (predictions != undefined) {
+                for (i = 0; i <= predictions.length - 1; i++) {
+                    if (predictions[i][1][no] == driver) {
+                        correctPredictionsBy.push(predictions[i][0]);
+                        correctCount += 1;
+                    }
+                }
+            }
+
+
+        }
+
 
         // var found = result.find(function(element) {
         //     return element[0] === no;
@@ -52,7 +69,12 @@ function ConstructMainRaceResultEmptyBar(result, no) {
         // }
     }
 
-    text += '<ons-list-item class="predictionDriverListItem">';
+    if (correctCount > 0) {
+        text += "<ons-list-item class='predictionDriverListItem' onclick='OnShowCorrectGuesses(\"" + correctPredictionsBy + "\")' + ' tappable>";
+    } else {
+        text += '<ons-list-item class="predictionDriverListItem">';
+    }
+
 
     text += '<div class="predictionDriverTypePointContainer">';
     text += '<div class="predictionDriverType">' + no + '</div>'; // + no // BIG NUMBER
@@ -79,6 +101,7 @@ function ConstructMainRaceResultEmptyBar(result, no) {
         text += '<div class="predictionDriverInfo">'; // DRIVER INFO
         text += '<div class="predictionDriverInfoName">' + driverInfo.firstName + ' ' + driverInfo.lastName.toUpperCase() + '</div>'; // DRIVER INFO NAME
         text += '<div class="predictionDriverTeamName">' + driverInfo.team.toUpperCase() + '</div>'; // DRIVER INFO TEAM
+        if (correctCount > 0) text += '<div class="correctPredictionCount">' + correctCount + 'x goed' + '</div>';
         text += '</div>'; // DRIVER INFO
         text += '<div class="predictionDriverFlag"><img src="https://patrickvankruistum.github.io/F1Poule/lib/img/' + driverInfo.country.toLowerCase() + '.jpg" style="max-width: 35px"/></div>'; // DRIVER FLAG
         text += '</div>';

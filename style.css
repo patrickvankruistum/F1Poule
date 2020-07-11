@@ -415,6 +415,13 @@
     font-size: 9px;
 }
 
+.correctPredictionCount {
+    color: rgb(255, 255, 255);
+    font-family: 'F1Bold';
+    font-size: 9px;
+    margin-top: -5px;
+}
+
 .predictionDriverFlag {
     float: right;
     /* margin: auto; */
